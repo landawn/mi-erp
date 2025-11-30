@@ -7,16 +7,16 @@
 ## Project Overview
 * **Objective:** Develop a world-class CRM/ERP system.
 * **Timeline:** 1 Year (180 effective working days).
-* **Team Size:** 60 persons.
+* **Team size:** 60 persons.
 
 
 ## Team Resource Allocation
 
 ### Development (30 Persons)
-* **Frontend / Web Developers:** 10
-    * *Structure:* Split into Team A and Team B.
-* **Backend Developers:** 10
-    * *Structure:* Split into Team 1 and Team 2.
+* **Frontend / Web Developers:** 10 (Divided into two sub-teams).
+    * *Scope:* End-to-end development of all web-based ERP interfaces.
+* **Backend Developers:** 10 (Divided into two sub-teams).
+    * *Scope:* Architecture and implementation of all server-side logic, APIs, and database integrations.
 * **iOS Developers:** 5
     * *Scope:* iPhone and iPad applications.
 * **Android Developers:** 5
