@@ -5,13 +5,13 @@
 # Project Resource Plan & Feasibility Analysis: Enterprise CRM/ERP (v1)
 
 ## 1. Project Overview
-**Objective:** Develop a world-class CRM/ERP system.
-**Team Size:** 10 Backend Developers.
-**Timeline:** 1 Year (180 effective working days).
+* **Objective:** Develop a world-class CRM/ERP system.
+* **Team Size:** 10 Backend Developers.
+* **Timeline:** 1 Year (180 effective working days).
 
 ---
 
-## 2. Architectural Assumptions
+## 2. Architectural Assumptions for backend
 The estimation is based on a standard layered architecture (Controller -> Service -> DAL) supporting a massive data schema.
 
 * **Database Schema:** ~1,000 Tables.
@@ -23,7 +23,7 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 
 ---
 
-## 3. Code Volume Estimation (LOC)
+## 3. Code Volume Estimation (LOC) for backend
 
 ### Production Code
 | Layer | Calculation Logic | Estimated LOC |
