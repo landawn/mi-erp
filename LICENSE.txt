@@ -172,7 +172,3 @@
       of your accepting any such warranty or additional liability.
 
    END OF TERMS AND CONDITIONS
-   
-   APPENDIX:
-      abacus-common will be a open source code project eventually. We just don't have
-      the plan ready yet.

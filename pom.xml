@@ -7,7 +7,7 @@
 	<version>0.1</version>
 	<packaging>jar</packaging>
 	<name>mi-erp</name>
-	<description>A general programming library in Java/Android. It's easy to learn and simple to use with concise and powerful APIs.</description>
+	<description>Have a try project</description>
 	<url>https://github.com/landawn/mi-erp</url>
 
 	<licenses>
@@ -155,7 +155,7 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.12.0</version>
 				<configuration>
-					<doctitle>abacus-extra</doctitle>
+					<doctitle>mi-erp</doctitle>
 					<show>public</show>
 					<source>25</source>
 					<encoding>UTF-8</encoding>
@@ -163,9 +163,6 @@
 					<source>${maven.compiler.source}</source>
 					<detectJavaApiLink>false</detectJavaApiLink>
 					<sourceFileExcludes>
-						<exclude>/com/landawn/abacus/type/**/*.java</exclude>
-						<exclude>/com/landawn/abacus/logging/**/*.java</exclude>
-						<exclude>/com/landawn/abacus/util/cs.java</exclude>
 					</sourceFileExcludes>
 				</configuration>
 				<executions>
@@ -184,7 +181,7 @@
 				<version>3.5.4</version>
 				<configuration>
 					<includes>
-						<include>**/ERPTestSuites.java</include>
+						<include>**/HelloERPTest.java</include>
 					</includes>
 					<useModulePath>false</useModulePath>
 					<testFailureIgnore>true</testFailureIgnore> <!-- set to false if you want failures to fail the build -->
