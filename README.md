@@ -4,14 +4,55 @@
 
 # Project Resource Plan & Feasibility Analysis: Enterprise CRM/ERP (v1)
 
-## 1. Project Overview
+## Project Overview
 * **Objective:** Develop a world-class CRM/ERP system.
-* **Team Size:** 10 Backend Developers.
 * **Timeline:** 1 Year (180 effective working days).
+* **Team Size:** 60 persons.
+
+
+## Team Resource Allocation
+
+### Development (30 Persons)
+* **Frontend / Web Developers:** 10
+    * *Structure:* Split into Team A and Team B.
+* **Backend Developers:** 10
+    * *Structure:* Split into Team 1 and Team 2.
+* **iOS Developers:** 5
+    * *Scope:* iPhone and iPad applications.
+* **Android Developers:** 5
+    * *Scope:* Android phone and tablet applications.
+
+### Quality Assurance (9 Persons)
+* **Framework Lead:** 1 (Build up test framework).
+* **Backend QA:** 2
+* **Frontend/Web QA:** 2
+* **Mobile QA:** 2 (1 for iOS, 1 for Android).
+* **Automation Specialists:** 2
+    * *Responsibilities:* Write 20% of automation/UI tests and maintain the 80% of automation tests written by the development team.
+    * *General QA Scope:* Responsible for building test frameworks/environments, maintenance, and execution.
+
+### Security (7 Persons)
+* **Network Security:** 2
+* **Data Storage Security:** 1
+* **Frontend/Web Security:** 1
+* **Backend Security:** 1
+* **iOS Security:** 1
+* **Android Security:** 1
+
+### DevOps (5 Persons)
+* **Responsibilities:**
+    * Setup Test and Production environments.
+    * Manage Deployment, Build, Monitoring, and Logging frameworks.
+
+### Management, Design & Docs (9 Persons)
+* **UX / Design:** 3
+* **Product Management:** 2
+* **Project Management:** 2
+* **Documentation:** 2 (Writing and management).
 
 ---
 
-## 2. Architectural Assumptions for backend
+## Architectural Assumptions for backend
 The estimation is based on a standard layered architecture (Controller -> Service -> DAL) supporting a massive data schema.
 
 * **Database Schema:** ~1,000 Tables.
@@ -23,7 +64,7 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 
 ---
 
-## 3. Code Volume Estimation (LOC) for backend
+## Code Volume Estimation (LOC) for backend
 
 ### Production Code
 | Layer | Calculation Logic | Estimated LOC |
@@ -48,7 +89,7 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 
 ---
 
-## 4. Feasibility Analysis
+## Feasibility Analysis
 
 **Question:** Is it possible for 10 developers to complete this scope in 180 days?
 
@@ -69,7 +110,7 @@ $$
 
 ---
 
-## 5. Strategic Recommendations
+## Strategic Recommendations
 
 To make the project achievable with the current team size, the following adjustments are required:
 
