@@ -13,10 +13,10 @@
 ## Team Resource Allocation
 
 ### Development (30 Persons)
-* **Frontend / Web Developers:** 10 (Divided into two sub-teams).
-    * *Scope:* End-to-end development of all web-based ERP interfaces.
 * **Backend Developers:** 10 (Divided into two sub-teams).
     * *Scope:* Architecture and implementation of all server-side logic, APIs, and database integrations.
+* **Frontend / Web Developers:** 10 (Divided into two sub-teams).
+    * *Scope:* End-to-end development of all web-based ERP interfaces.
 * **iOS Developers:** 5
     * *Scope:* iPhone and iPad applications.
 * **Android Developers:** 5
