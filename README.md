@@ -315,7 +315,7 @@ Let's accept your optimized numbers. You have effectively crushed the Data Acces
 ### 2. The Remaining Wall: The "Service Layer"
 
 
-[Image of 3-tier architecture diagram]
+![Image of 3-tier architecture diagram](./docs/Gemini_Generated_3-Tier Backend-focused Architecture diagram.png)
 
 
 The diagram above illustrates the problem. You have successfully shrunk the bottom layer (**DAL**). However, the middle layer (**Service/Business Logic**) remains untouched.
