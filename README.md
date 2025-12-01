@@ -145,7 +145,7 @@ Here is the updated calculation and reality check.
 Using your same complexity assumptions (LOC per layer) but with 1,500 APIs:
 
 * **Production Code:** 1,260,000 LOC
-    * *(Calculation: 1,500 APIs $\times$ 700 LOC/API + 20% overhead)*
+    * *(Calculation: 1,500 APIs \times 700 LOC/API + 20% overhead)*
 * **Test Code (2:1):** 2,520,000 LOC
 * **Grand Total:** **3,780,000 Lines of Code**
 
