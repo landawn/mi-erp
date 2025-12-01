@@ -143,7 +143,7 @@ Me talking to AI......
 
 ### **1. The New Math (1,500 APIs)**
 
-Using your same complexity assumptions (LOC per layer) but with 1,500 APIs:
+*AI*: Using your same complexity assumptions (LOC per layer) but with 1,500 APIs:
 
 * **Production Code:** 1,260,000 LOC
     * *(Calculation: 1,500 APIs x 700 LOC/API + 20% overhead)*
@@ -190,7 +190,7 @@ Stop counting Lines of Code (LOC) and start counting **Features/Tables**:
 
 ## You mentioned the industry average is 10–50 lines of finished, debugged code per day for complex enterprise systems. But have you heard the stories about engineers who are 10× or even 100× more productive?
 
-Yes, the "10x Engineer" (and even "100x Engineer") is a real concept in software engineering, popularized by studies like those from Sackman, Erikson, and Grant. However, relying on this for your resource plan relies on a fundamental misunderstanding of **how** those engineers achieve high productivity.
+*AI*:  Yes, the "10x Engineer" (and even "100x Engineer") is a real concept in software engineering, popularized by studies like those from Sackman, Erikson, and Grant. However, relying on this for your resource plan relies on a fundamental misunderstanding of **how** those engineers achieve high productivity.
 
 Here is why the "10x Engineer" concept does not save this specific project plan:
 
@@ -246,7 +246,7 @@ The "10x Engineer" story is true because they solve hard problems quickly, not b
 
 ## Could this be achievable by leveraging AI? For instance, AI could potentially generate thousands of lines of test code within an hour.
 
-Using AI to generate test code changes the equation, but it **does not solve the fundamental feasibility problem.**
+*AI*: Using AI to generate test code changes the equation, but it **does not solve the fundamental feasibility problem.**
 
 You are correct that AI (like GitHub Copilot, Cursor, or custom LLM scripts) can physically generate thousands of lines of test code in an hour. However, doing so for a "World-Class" ERP system introduces a new bottleneck: **Verification Latency.**
 
@@ -300,7 +300,7 @@ AI can generate the *volume* you asked for, but it generates **Technical Debt** 
 
 
 
-I think you are applying the right **strategy** (attack the boilerplate), but the **math** still leaves your team in a "Death March" scenario.
+*AI*: I think you are applying the right **strategy** (attack the boilerplate), but the **math** still leaves your team in a "Death March" scenario.
 
 Here is the breakdown of why saving ~2.5 million lines of code (LOC) is excellent news, but unfortunately, it doesn't save the timeline.
 
