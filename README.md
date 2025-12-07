@@ -133,7 +133,7 @@ Reducing the APIs by half brings the target number down, but it leaves you in th
 
 ---
 
-Me talking to AI......
+<span style="color:blue"><i>Continuing my chat with the AI…</i></span>
 
 
 ## Is it feasible to reduce the total number of APIs from 3,000 to 1,500?
