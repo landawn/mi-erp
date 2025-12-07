@@ -15,7 +15,7 @@
 ### Development (40 Persons)
 * **Backend Developers:** 15 (Divided into two sub-teams).
     * *Scope:* Architecture and implementation of all server-side logic, APIs, and database integrations.
-* **Frontend / Web Developers:** 15 (Divided into two sub-teams).
+* **Frontend/Web Developers:** 15 (Divided into two sub-teams).
     * *Scope:* End-to-end development of all web-based ERP interfaces.
 * **iOS Developers:** 5
     * *Scope:* iPhone and iPad applications.
@@ -428,8 +428,18 @@ You cannot write a 1.8 million line custom ERP system with 15 people in 6 months
 
 ---
 
-## New Architectural Assumptions for backend
-The estimation is based on a standard layered architecture (Controller -> Service -> DAL) supporting a massive data schema.
+## Team Resource Allocation and Architectural Assumptions for backend
+
+* **Team Resource Allocation:** 80 persons
+    * **Backend Developers:** 20 (Divided into three sub-teams).
+    * **Frontend/Web Developers:** 20 (Divided into three sub-teams).
+    * **iOS Developers:** 5.
+    * **Android Developers:** 5.
+    * **Quality Assurance:** 9.
+    * **AI Specialists/DevOps:** 7.
+    * **Security:** 5.
+    * **Management, Design & Docs:** 9.
+
 
 * **Database Schema:** ~1,000 Tables.
 * **API Surface:** ~3,000 Web Service APIs (3 per table).
@@ -466,19 +476,19 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 
 ## Feasibility Analysis
 
-**Question:** Is it possible for 15 developers to complete this scope in 180 days?
+**Question:** Is it possible for 20 developers to complete this scope in 180 days?
 
 ### The Math
 To meet this deadline, the required velocity per developer is:
 
 $$
-\frac{3,240,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{1,200 \text{ LOC / day}}
+\frac{3,240,000 \text{ LOC}}{20 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{900 \text{ LOC / day}}
 $$
 
 ### The Reality Gap
-1.  **Required Output:** 1,200 lines per day, per person.
+1.  **Required Output:** 900 lines per day, per person.
 2.  **Industry Average:** 20-50 lines of *finished, debugged* code per day for complex enterprise systems—*low, with plenty of room for improvement*
-3.  **Discrepancy:** The plan requires a pace **24x–60x faster** than the industry standard.
+3.  **Discrepancy:** The plan requires a pace **18x–45x faster** than the industry standard.
 
 
 * **I believe it's still achievable under exceptional conditions**:
