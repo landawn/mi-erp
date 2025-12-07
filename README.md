@@ -313,7 +313,7 @@ Let's accept your optimized numbers. You have effectively crushed the Data Acces
 * **Production Code:** 1,800,000 LOC
     * *(Calculation: 3,000 APIs x 500 LOC/API + 20% overhead)*
 * **Test Code (2:1):** 3,300,000 LOC
-    * *(Calculation: 1,800,000 x 3 - 300,000)*
+    * *(Calculation: 1,800,000 x 2 - 300,000)*
 
 ##### **New Grand Total Project Scope for Backend Dev**
 > **3,450,000 LOC = 1,800,000 Production LOC + 1,650,000 Test LOC**
@@ -383,13 +383,13 @@ Let's assume you keep the DAL optimization and strip out **all** testing tasks.
 * **Controller Layer:** 300,000 LOC
 * **Service Layer:** 900,000 LOC
 * **DAL (Optimized):** 300,000 LOC
-* **Shared/Overhead:** ~300,000 LOC
+* **Shared/Overhead:** 300,000 LOC
 
-**Total Production Code:** **~1,200,000 LOC**
+**Total Production Code:** **~1,800,000 LOC**
 
 #### **The Velocity Check**
 $$
-\frac{1,200,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{666 \text{ LOC / day}}
+\frac{1,800,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{666 \text{ LOC / day}}
 $$
 
 ### 2. Why 666 LOC/day is still impossible
@@ -399,7 +399,7 @@ Even without writing a single line of test code, you are asking every developer 
 To put that in perspective:
 * **The Physical Limit:** 666 lines of code is roughly **22 pages** of ~~dense logical text~~ (*doesn't necessarily need to be densely packed with logic*).
 * **The Mental Limit:** A developer cannot design, implement, and debug 22 pages of unique business logic daily.
-* **The Comparison:** This is roughly **14x higher** than ~~the industry average for high-performing teams (approx. 50 lines of finished logic/day)~~ (*Why is it so low?*).
+* **The Comparison:** This is roughly **13x higher** than ~~the industry average for high-performing teams (approx. 50 lines of finished logic/day)~~ (*Why is it so low?*).
 
 ### 3. The "No Tests" Trap (The Suicide Run)
 If you decide to skip writing tests to "save time," you trigger a phenomenon known in engineering as **The Stabilization Plateau**.
@@ -475,7 +475,7 @@ $$
 
 ### The Reality Gap
 1.  **Required Output:** 1,200 lines per day, per person.
-2.  **Industry Average:** 20-50 lines of *finished, debugged* code per day for complex enterprise systems—low, with plenty of room for improvement
+2.  **Industry Average:** 20-50 lines of *finished, debugged* code per day for complex enterprise systems—*low, with plenty of room for improvement*
 3.  **Discrepancy:** The plan requires a pace **24x–60x faster** than the industry standard.
 
 
