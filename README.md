@@ -77,7 +77,9 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 ### Test Code
 * **Ratio:** 2 lines of test code per 1 line of production code.
 * **Total Test LOC:** 5,040,000
-* **Grand Total Project Scope:** 7,560,000
+
+##### **Grand Total Project Scope**
+> **7,560,000 Lines of Code**
 
 ##### **Grand Total Project Scope for Backend Dev**
 > **5,040,000 LOC = 2,520,000 Production LOC + 2,520,000 Test LOC**
