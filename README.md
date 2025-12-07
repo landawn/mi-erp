@@ -22,12 +22,11 @@
 * **Android Developers:** 5
     * *Scope:* Android phone and tablet applications.
 
-### Quality Assurance (10 Persons)
+### Quality Assurance (9 Persons)
 * **Framework:** 2 (Build up test framework).
-* **Backend QA:** 2
 * **Frontend/Web QA:** 2
 * **Mobile QA:** 2 (1 for iOS, 1 for Android).
-* **Automation Specialists:** 2
+* **Automation Specialists:** 3
     * *Responsibilities:* Write 20% of automation/UI tests and maintain the 80% of automation tests written by the development team.
     * *General QA Scope:* Responsible for building test frameworks/environments, maintenance, and execution.
 
@@ -43,11 +42,11 @@
 * **Frontend/Web Security:** 1
 * **App(iOS/Android) Security:** 1
 
-### Management, Design & Docs (8 Persons)
+### Management, Design & Docs (9 Persons)
 * **UX/Design:** 3
 * **Product Management:** 2
 * **Project Management:** 2
-* **Documentation:** 1 (Writing and management).
+* **Documentation:** 2 (Writing and management).
 
 ---
 
