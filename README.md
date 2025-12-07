@@ -428,7 +428,7 @@ You cannot write a 1.8 million line custom ERP system with 15 people in 6 months
 
 ---
 
-## Team Resource Allocation and Architectural Assumptions for backend
+## New Team Resource Allocation and Architectural Assumptions for backend
 
 * **Team Resource Allocation:** 80 persons
     * **Backend Developers:** 20 (Divided into three sub-teams).
@@ -440,6 +440,7 @@ You cannot write a 1.8 million line custom ERP system with 15 people in 6 months
     * **Security:** 5.
     * **Management, Design & Docs:** 9.
 
+---
 
 * **Database Schema:** ~1,000 Tables.
 * **API Surface:** ~3,000 Web Service APIs (3 per table).
@@ -502,3 +503,25 @@ $$
   All of these factors not only improve productivity, but also reduce cognitive load, making coding easier, simpler, and faster.
 ---
  
+ 
+## What's “code ratio” between backend and frontend?
+ 
+There’s no fixed “code ratio” between backend and frontend that applies universally to a web-based ERP (or any web) system — it depends heavily on things like architecture, functionality, UI complexity, and overall design choices
+
+| Project          | Main stack (high-level)                                          | What I counted as **backend**                            | What I counted as **frontend**        | Approx backend % | Approx frontend % | Backend : Frontend (approx) | Notes                                                                                                                                     |
+| ---------------- | ---------------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------- | ---------------- | ----------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Odoo**         | Python + JS, web UI ([GitHub][1])                                | Python                                                   | JavaScript + CSS/SCSS + HTML + Fluent | ~50%             | ~50%              | **~1 : 1**                  | Odoo is unusually “full-stack balanced” – a lot of UI logic and widgets live in JS alongside substantial Python models.                   |
+| **ERPNext**      | Python (Frappe) + JS + Vue UI ([GitHub][2])                      | Python                                                   | JavaScript + HTML                     | 80%              | 19%               | **~4 : 1**                  | Classic web ERP with heavy server-side logic; client uses JS/Vue for forms, list views, etc., but business rules are mostly in Python.    |
+| **metasfresh**   | Java + PostgreSQL + tiny JS ([GitHub][3])                        | Java + PL/pgSQL + Gherkin (tests)                        | JavaScript + TypeScript + SCSS        | 97%              | 3%                | **~36 : 1**                 | Super backend-centric: domain logic, services, and even a lot of “view” work are Java; very thin browser layer.                           |
+| **Apache OFBiz** | Java + FreeMarker/Groovy + a bit of JS/CSS ([GitHub][4])         | Java + Groovy + FreeMarker templates (server-side views) | JavaScript + CSS + Less               | ~94%             | ~6%               | **~17 : 1**                 | Old-school server-rendered ERP: web pages are mostly templates + server Java; browser JS is mainly enhancements.                          |
+| **Dolibarr**     | PHP + MySQL + JS ([Dolibarr][5])                                 | PHP + SQL                                                | JavaScript + HTML/CSS                 | ~75%             | ~25%              | **~3 : 1** (est.)           | Docs say “developed in PHP”; UI is mostly server-rendered, with JS as progressive enhancement → reasonably backend-heavy but not extreme. |
+| **Tryton**       | Python server & client + minimal JS/XML ([Tryton Discussion][6]) | Python + XML                                             | Small JS for web client               | ~90%             | ~10%              | **~9 : 1** (est.)           | Community explicitly notes that for Tryton you mainly need Python (plus some XML); very thin browser code.                                |
+| **iDempiere**    | Java + PostgreSQL/Oracle + ZK UI ([GitHub][7])                   | Java (core, services, entities)                          | ZK/ZUL UI markup + JS/CSS             | ~85%             | ~15%              | **~6 : 1** (est.)           | Java monolith with server-side UI framework; browser side is mostly generated markup + some JS.                                           |
+
+[1]: https://github.com/odoo/odoo?utm_source=chatgpt.com "Odoo. Open Source Apps To Grow Your Business."
+[2]: https://github.com/frappe/erpnext "GitHub - frappe/erpnext: Free and Open Source Enterprise Resource Planning (ERP)"
+[3]: https://github.com/metasfresh/metasfresh "GitHub - metasfresh/metasfresh: We do Open Source ERP - Fast, Flexible & Free Software to scale your Business."
+[4]: https://github.com/apache/ofbiz-framework "GitHub - apache/ofbiz-framework: Apache OFBiz is an open source product for the automation of enterprise processes. It includes framework components and business applications for ERP, CRM, E-Business/E-Commerce, Supply Chain Management and Manufacturing Resource Planning. OFBiz provides a foundation and starting point for reliable, secure and scalable enterprise solutions."
+[5]: https://www.dolibarr.org/git-sources.php?utm_source=chatgpt.com "GIT Sources"
+[6]: https://discuss.tryton.org/t/tryton-vs-erpnext/3738?utm_source=chatgpt.com "Tryton vs. ERPnext - User"
+[7]: https://github.com/idempiere/idempiere "GitHub - idempiere/idempiere: iDempiere. Community Powered Enterprise.  Full Open Source Business Suite ERP/CRM/MFG/SCM/POS"
