@@ -465,11 +465,11 @@ $$
 
 ### The Reality Gap
 1.  **Required Output:** 1,800 lines per day, per person.
-2.  **Industry Average:** ~~10–50 lines of *finished, debugged* code per day for complex enterprise systems~~. This is too low. 
+2.  **Industry Average:** 10–50 lines of *finished, debugged* code per day for complex enterprise systems—low, with plenty of room for improvement
 3.  **Discrepancy:** The plan requires a pace **36x–180x faster** than the industry standard.
 
 
-* **I believe it's still achievable under exceptional conditions**:
+**I believe it's still achievable under exceptional conditions**:
 
     * **Highly mature frameworks** (e.g., *JDK 25+, Spring 7+*)
     * **Extremely productive libraries and tooling**.
