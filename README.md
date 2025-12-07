@@ -31,22 +31,20 @@
     * *Responsibilities:* Write 20% of automation/UI tests and maintain the 80% of automation tests written by the development team.
     * *General QA Scope:* Responsible for building test frameworks/environments, maintenance, and execution.
 
-### Security (7 Persons)
-* **Network Security:** 2
-* **Data Storage Security:** 1
-* **Frontend/Web Security:** 1
-* **Backend Security:** 1
-* **iOS Security:** 1
-* **Android Security:** 1
-
-### AI Specialists/ DevOps (5 Persons)
+### AI Specialists(2 persons)/DevOps(5 Persons)
 * **Responsibilities:**
     * Setup AI environments, toolchains, and integrate AI capabilities into the development workflow.
     * Configure and maintain testing, staging, and production environments.
     * Manage CI/CD pipelines, deployments, build processes, monitoring, and logging infrastructures.
+    
+### Security (5 Persons)
+* **Network/Data Storage Security:** 2
+* **Backend Security:** 1
+* **Frontend/Web Security:** 1
+* **Android(iOS/Android) Security:** 1
 
 ### Management, Design & Docs (9 Persons)
-* **UX / Design:** 3
+* **UX/Design:** 3
 * **Product Management:** 2
 * **Project Management:** 2
 * **Documentation:** 2 (Writing and management).
