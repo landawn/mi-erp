@@ -41,7 +41,7 @@
 * **Network/Data Storage Security:** 2
 * **Backend Security:** 1
 * **Frontend/Web Security:** 1
-* **Android(iOS/Android) Security:** 1
+* **App(iOS/Android) Security:** 1
 
 ### Management, Design & Docs (9 Persons)
 * **UX/Design:** 3
