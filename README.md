@@ -79,7 +79,7 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 * **Total Test LOC:** 5,040,000
 * **Total Test LOC written by backend dev:** 2,520,000 = 5,040,000 x 50%
 
-##### **Grand Total Project Scope**
+##### **Grand Total Project Scope for Backend Dev**
 > **5,040,000 LOC = 2,520,000 Production LOC + 2,520,000 Test LOC**
 
 
@@ -101,14 +101,14 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 To meet this deadline, the required velocity per developer is:
 
 $$
-\frac{7,560,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{2,800 \text{ LOC / day}}
+\frac{5,040,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{1,866 \text{ LOC / day}}
 $$
 
 ### The Reality Gap
-1.  **Required Output:** 2,800 lines per day, per person.
+1.  **Required Output:** 1,866 lines per day, per person.
 2.  **Industry Average:** 10–50 lines of *finished, debugged* code per day for complex enterprise systems.
 3.  **Discrepancy:** The plan requires a pace **56x–280x faster** than the industry standard.
-4.  **Conclusion:** It is physically impossible for a developer to design, write, test, and debug 2,800 lines of logic daily. This volume is equivalent to typing ~93 pages of text every single day without stopping to think.
+4.  **Conclusion:** It is physically impossible for a developer to design, write, test, and debug 1,866 lines of logic daily. This volume is equivalent to typing ~93 pages of text every single day without stopping to think.
 
 ---
 
@@ -156,7 +156,7 @@ $$
 
 ### **2. Why it is still impossible**
 
-* **The Velocity Gap:** You have moved the requirement from **2,800 LOC/day** to **1,400 LOC/day**. While this is a 50% reduction, it is still roughly **28x to 70x higher** than the industry average for a productive developer (20–50 lines of finished code/day).
+* **The Velocity Gap:** You have moved the requirement from **1,866 LOC/day** to **1,400 LOC/day**. While this is a 50% reduction, it is still roughly **28x to 70x higher** than the industry average for a productive developer (20–50 lines of finished code/day).
 * **The "Typing vs. Thinking" Fallacy:** Writing 1,400 lines of code is equivalent to writing a **47-page novella every single day**. Even if a developer could *type* that fast, they cannot *think* that fast. They need to understand the business requirements for the 1,000 database tables, design the logic, and debug errors.
 
 ### **3. The Hidden "Logic Trap"**
@@ -275,7 +275,7 @@ Let's apply an optimistic "AI Multiplier" to your original plan.
 * **Real Work:** The developers only need to *review* and *fix* the AI's output.
 
 Even if AI makes your team **3x more productive** (a massive jump):
-* **Original Requirement:** 2,800 LOC/day/person.
+* **Original Requirement:** 1,866 LOC/day/person.
 * **AI-Adjusted Capacity:** ~150 LOC/day/person (Standard 50 $\times$ 3).
 * **Gap:** You are still short by a factor of **19x**.
 
@@ -353,7 +353,7 @@ The Service Layer is different. It contains **Business Rules**:
 * Frameworks can help structure this, but a human still has to define the rules.
 
 ### Summary
-Your optimization moves the project from **"Physically Impossible"** (2,800 LOC/day) to **"Still Impossible"** (1,000 LOC/day).
+Your optimization moves the project from **"Physically Impossible"** (1,866 LOC/day) to **"Still Impossible"** (1,000 LOC/day).
 
 **To make this work with 15 developers, you need to apply the same "90% reduction" thinking to the Service Layer.**
 * Are those 100 lines of logic per method real?
