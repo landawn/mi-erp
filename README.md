@@ -504,7 +504,7 @@ $$
 ---
  
  
-## What's “code ratio” between backend and frontend?
+## What is the typical backend-to-frontend code ratio for a web-based ERP system?
  
 There’s no fixed “code ratio” between backend and frontend that applies universally to a web-based ERP (or any web) system — it depends heavily on things like architecture, functionality, UI complexity, and overall design choices. But I can walk you through what influences that ratio, what you might expect, and typical “ballpark” observations.
 
@@ -611,7 +611,7 @@ So if you want a single planning number for a “typical” web ERP that isn’t
 
 ---
 
-## What's the typical “developer ratio” between backend and frontend for a web based erp system?
+## What is the typical backend-to-frontend developer ratio for a web-based ERP system?
 
 Here’s a practical real-world perspective based on how **most ERP software teams are staffed** rather than code volume — which is often more meaningful for planning.
 
