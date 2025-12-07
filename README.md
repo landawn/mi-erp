@@ -39,10 +39,11 @@
 * **iOS Security:** 1
 * **Android Security:** 1
 
-### DevOps (5 Persons)
+### AI Specialists/ DevOps (5 Persons)
 * **Responsibilities:**
-    * Setup Test and Production environments.
-    * Manage Deployment, Build, Monitoring, and Logging frameworks.
+    * Setup AI environments, toolchains, and integrate AI capabilities into the development workflow.
+    * Configure and maintain testing, staging, and production environments.
+    * Manage CI/CD pipelines, deployments, build processes, monitoring, and logging infrastructures.
 
 ### Management, Design & Docs (9 Persons)
 * **UX / Design:** 3
