@@ -147,8 +147,9 @@ Reducing the APIs by half brings the target number down, but it leaves you in th
 * **Production Code:** 1,260,000 LOC
     * *(Calculation: 1,500 APIs x 700 LOC/API + 20% overhead)*
 * **Test Code (2:1):** 2,520,000 LOC
-* **Total Test LOC written by backend dev:** 1,260,000 = 2,520,000 x 50%
-* **Grand Total for backend dev:** **2,520,000 Lines of Code**
+
+##### **Grand Total Project Scope for Backend Dev**
+> **2,520,000 LOC = 1,260,000 Production LOC + 1,260,000 Test LOC**
 
 #### **The Daily Target**
 $$
@@ -309,9 +310,14 @@ Here is the breakdown of why saving ~2.5 million lines of code (LOC) is excellen
 
 Let's accept your optimized numbers. You have effectively crushed the Data Access Layer (DAL) complexity.
 
-* **Original Project Size:** ~7,540,000 LOC
-* **Your Savings:** ~2,500,000 LOC (Eliminating most DAL + Tests)
-* **New Project Size for backend dev:** **3,420,000 LOC = (300,000 + 900,000) x 1.2 x 2 + (300,000) x 1.2 x 1.5**
+* **Production Code:** 1,800,000 LOC
+    * *(Calculation: 3,000 APIs x 500 LOC/API + 20% overhead)*
+* **Test Code (2:1):** 3,300,000 LOC
+    * *(Calculation: 1,800,000 x 3 - 300,000)*
+
+##### **New Grand Total Project Scope for Backend Dev**
+> **3,450,000 LOC = 1,800,000 Production LOC + 1,650,000 Test LOC**
+
 
 ### 2. The Remaining Wall: The "Service Layer"
 
@@ -327,14 +333,16 @@ The diagram above illustrates the problem. You have successfully shrunk the bott
 
 Look at the numbers for the Service Layer alone (based on your original plan):
 * **Service Code:** 3,000 APIs $\times$ 3 methods $\times$ 100 LOC = **900,000 LOC**
-* **Service Tests (2:1):** **1,200,000 LOC**
-* **Total Service Burden for backend dev:** **1,200,000 LOC**
+* **Service Tests (2:1):** **1,800,000 LOC**
+
+##### **Total LOC in service Level for Backend Dev**
+> **1,800,000 LOC = 900,000 Production LOC + 900,000 Test LOC**
 
 ### 3. The Revised Feasibility Check
 Even if the Controller and DAL layers took **zero** time, let's see if 15 developers can build *just* the Service Layer (1.8M LOC) in 180 days.
 
 $$
-\frac{1,200,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} = \mathbf{666 \text{ LOC / day}}
+\frac{1,800,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} = \mathbf{666 \text{ LOC / day}}
 $$
 
 **The Verdict:**
