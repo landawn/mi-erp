@@ -389,9 +389,9 @@ $$
 Even without writing a single line of test code, you are asking every developer to write roughly **630 lines of working Java code every single day**.
 
 To put that in perspective:
-* **The Physical Limit:** 630 lines of code is roughly **21 pages** of dense logical text.
+* **The Physical Limit:** 630 lines of code is roughly **21 pages** of ~~dense logical text~~(doesn't necessarily need to be densely packed with logic).
 * **The Mental Limit:** A developer cannot design, implement, and debug 21 pages of unique business logic daily.
-* **The Comparison:** This is roughly **13x higher** than the industry average for high-performing teams (approx. 50 lines of finished logic/day).
+* **The Comparison:** This is roughly **13x higher** than ~~the industry average for high-performing teams (approx. 50 lines of finished logic/day)~~ (Why is it so low?).
 
 ### 3. The "No Tests" Trap (The Suicide Run)
 If you decide to skip writing tests to "save time," you trigger a phenomenon known in engineering as **The Stabilization Plateau**.
