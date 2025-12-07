@@ -27,7 +27,7 @@
 * **Frontend/Web QA:** 2
 * **Mobile QA:** 2 (1 for iOS, 1 for Android).
 * **Automation Specialists:** 3
-    * *Responsibilities:* Write 20% of automation/UI tests and maintain the 80% of automation tests written by the development team.
+    * *Responsibilities:* Write 30% of automation/UI tests and maintain the 70% of automation tests written by the development team.
     * *General QA Scope:* Responsible for building test frameworks/environments, maintenance, and execution.
 
 ### AI Specialists(2 persons)/DevOps(5 Persons)
@@ -295,7 +295,7 @@ AI can generate the *volume* you asked for, but it generates **Technical Debt** 
 
 ---
 
-## Now imagine if I tell you that, by using a highly efficient framework, I can reduce the DAL code from 900,000 to 300,000 lines, and also cut the DAL test-code ratio from 2:1 to 1:1, a total savings of **2.7 million LOC**. What would you think about that?
+## Now imagine if I tell you that, by using a highly efficient framework, I can reduce the DAL code from 900,000 to 300,000 lines, and also cut the DAL test-code ratio from 2:1 to 1:1, a total savings of **~2.5 million LOC**. What would you think about that?
 
 
 
@@ -308,8 +308,8 @@ Here is the breakdown of why saving ~2.5 million lines of code (LOC) is excellen
 Let's accept your optimized numbers. You have effectively crushed the Data Access Layer (DAL) complexity.
 
 * **Original Project Size:** ~7,560,000 LOC
-* **Your Savings:** ~2,700,000 LOC (Eliminating most DAL + Tests)
-* **New Project Size:** **~4,860,000 LOC**
+* **Your Savings:** ~2,500,000 LOC (Eliminating most DAL + Tests)
+* **New Project Size:** **~5,060,000 LOC**
 
 ### 2. The Remaining Wall: The "Service Layer"
 
@@ -373,13 +373,13 @@ Let's assume you keep the DAL optimization and strip out **all** testing tasks.
 * **Controller Layer:** 300,000 LOC
 * **Service Layer:** 900,000 LOC
 * **DAL (Optimized):** 300,000 LOC
-* **Shared/Overhead:** ~200,000 LOC
+* **Shared/Overhead:** ~300,000 LOC
 
-**Total Production Code:** **~1,700,000 LOC**
+**Total Production Code:** **~1,800,000 LOC**
 
 #### **The Velocity Check**
 $$
-\frac{1,700,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{630 \text{ LOC / day}}
+\frac{1,800,000 \text{ LOC}}{15 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{666 \text{ LOC / day}}
 $$
 
 ### 2. Why 630 LOC/day is still impossible
@@ -387,9 +387,9 @@ $$
 Even without writing a single line of test code, you are asking every developer to write roughly **630 lines of working Java code every single day**.
 
 To put that in perspective:
-* **The Physical Limit:** 630 lines of code is roughly **21 pages** of ~~dense logical text~~ (*doesn't necessarily need to be densely packed with logic*).
-* **The Mental Limit:** A developer cannot design, implement, and debug 21 pages of unique business logic daily.
-* **The Comparison:** This is roughly **13x higher** than ~~the industry average for high-performing teams (approx. 50 lines of finished logic/day)~~ (*Why is it so low?*).
+* **The Physical Limit:** 666 lines of code is roughly **22 pages** of ~~dense logical text~~ (*doesn't necessarily need to be densely packed with logic*).
+* **The Mental Limit:** A developer cannot design, implement, and debug 22 pages of unique business logic daily.
+* **The Comparison:** This is roughly **14x higher** than ~~the industry average for high-performing teams (approx. 50 lines of finished logic/day)~~ (*Why is it so low?*).
 
 ### 3. The "No Tests" Trap (The Suicide Run)
 If you decide to skip writing tests to "save time," you trigger a phenomenon known in engineering as **The Stabilization Plateau**.
@@ -406,7 +406,7 @@ You have now tried to bargain with the constraints three times:
 3.  **Remove Tests?** (Still too big + dangerous)
 
 **The Reality:**
-You cannot write a 1.7 million line custom ERP system with 15 people in 6 months. The math simply does not support it.
+You cannot write a 1.8 million line custom ERP system with 15 people in 6 months. The math simply does not support it.
 
 **Your only viable options are:**
 1.  **Scope:** Build 75 tables, not 1,000.
