@@ -13,15 +13,15 @@
 ## Team Resource Allocation
 
 ### Development (40 Persons)
-* **Backend Developers:** 15 (Divided into two sub-teams). Scope of work:
+* **Backend Developers:** 15 (Divided into two sub-teams). **Scope of work**:
     * Architecture and implementation of all server-side logic, APIs, and database integrations, with heavy emphasis on business-critical logic and workflows.
-* **Frontend/Web Developers:** 15 (Divided into two sub-teams). Scope of work:
+* **Frontend/Web Developers:** 15 (Divided into two sub-teams). **Scope of work**:
     * End-to-end development of a fully functional web-based ERP frontend—designed to be lightweight, intuitive, and easy to use.
     * Collaborate with QA and DevOps to build internal development and testing tools.
-* **iOS Developers:** 5. Scope of work:
-    * The iPhone/iPad app exposes only a subset of core features (e.g., approvals, field tasks).
-* **Android Developers:** 5. Scope of work:
-    * Android phone and tablet app exposes only a subset of core features (e.g., approvals, field tasks).
+* **iOS Developers:** 5. **Scope of work**:
+    * Develop the iPhone/iPad apps which only expose a subset of core features (e.g., approvals, field tasks).
+* **Android Developers:** 5. **Scope of work**:
+    * Develop the Android phone and tablet apps which only expose a subset of core features (e.g., approvals, field tasks).
 
 ### Quality Assurance (9 Persons)
 * **Framework:** 2 (Build up test framework).
