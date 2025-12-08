@@ -14,7 +14,7 @@
 
 ### Development (40 Persons)
 * **Backend Developers:** 15 (Divided into two sub-teams). **Scope of work**:
-    * Architecture and implementation of all server-side logic, APIs, and database integrations, with heavy emphasis on business-critical logic and workflows.
+    * Design and implement the backend architecture that drives all core business logic and functions.
 * **Frontend/Web Developers:** 15 (Divided into two sub-teams). **Scope of work**:
     * End-to-end development of a fully functional web-based ERP frontend—designed to be lightweight, intuitive, and easy to use.
     * Collaborate with QA and DevOps to build internal development and testing tools.
@@ -94,7 +94,7 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 
 * [What is the typical backend-to-frontend code ratio for a web-based ERP system?](https://github.com/landawn/mi-erp/blob/main/docs/What%20is%20the%20typical%20backend-to-frontend%20code%20ratio%20for%20a%20web-based%20ERP%20system.md)
 
-* [What is the typical backend-to-iOS-app developer ratio for a web-based ERP system?]
+* [What is the typical backend-to-iOS-app developer ratio for a web-based ERP system?](https://github.com/landawn/mi-erp/blob/main/docs/What%20is%20the%20typical%20backend-to-iOS-app%20developer%20ratio%20for%20a%20web-based%20ERP%20system.md)
 ---
 
 ## Feasibility Analysis
