@@ -511,8 +511,8 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ### Example: 100 tables (baseline assumptions)
 
-* **Production LOC (target)**: **162,000**
-* **Test LOC (target)**: **324,000**
+* Production LOC (target): 162,000
+* Test LOC (target): 324,000
 * → **Total LOC**: **486,000**
 
 ---
@@ -632,7 +632,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 * If **half of the production code is boilerplate / highly similar**, then production LOC per dev over 40 days could drop from **27,000 → 13,500 LOC** (50% reduction).
 * If **AI generates 50% of the test code**, test LOC per dev drops from **27,000 → 13,500 LOC**.
-* Under those optimistic assumptions, per-developer hand-written LOC over the 10 days becomes:
+* Under those optimistic assumptions, per-developer hand-written LOC over the 40 days becomes:
 
   * **13,500 production + 13,500 test = 27,000 LOC** each.
   
