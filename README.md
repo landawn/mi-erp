@@ -614,7 +614,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 #### Next 21-60 (40 working days, ~2 months) — Implement API logic per table
 
-* Per developer responsibilities: *20 tables → 60 APIs**.
+* Per developer responsibilities: **20 tables → 60 APIs**.
 * Estimated LOC per API:
 
   * Controller: **100 LOC**
@@ -693,7 +693,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 #### Next 26-70 (45 working days, ~2 months) — Implement API logic per table
 
-* Per developer responsibilities: *33 tables → 100 APIs**.
+* Per developer responsibilities: **33 tables → 100 APIs**.
 * Estimated LOC per API:
 
   * Controller: **100 LOC**
