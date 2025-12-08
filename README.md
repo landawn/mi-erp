@@ -92,7 +92,7 @@ The estimation is based on a standard layered architecture (Controller -> Servic
 * [Estimated Code Size of Popular Open-Source ERP Systems](https://github.com/landawn/mi-erp/blob/main/docs/Estimated%20Code%20Size%20of%20Popular%20Open-Source%20ERP%20Systems.pdf)
 * [Comparative LOC Analysis of Open-Source ERP Systems](https://github.com/landawn/mi-erp/blob/main/docs/Comparative%20LOC%20Analysis%20of%20Open-Source%20ERP%20Systems.pdf)
 
-* [What is the typical backend-to-frontend code ratio for a web-based ERP system?](https://github.com/landawn/mi-erp/blob/main/docs/Comparative%20LOC%20Analysis%20of%20Open-Source%20ERP%20Systems.pdf)
+* [What is the typical backend-to-frontend code ratio for a web-based ERP system?](https://github.com/landawn/mi-erp/blob/main/docs/What%20is%20the%20typical%20backend-to-frontend%20code%20ratio%20for%20a%20web-based%20ERP%20system.md)
 ---
 
 ## Feasibility Analysis
