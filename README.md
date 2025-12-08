@@ -517,7 +517,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Plan A: based on 20 backend developers in one month.
+### Plan A: based on 20 backend developers in one month
 
 #### Day 1–2 (2 working days) — Schema & table design
 
@@ -578,7 +578,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 ---
 
 
-### Plan B: based on 5 backend developers in three months.
+### Plan B: based on 5 backend developers in 3.5 months
 
  
 #### Day 1–8 (8 working days, ~2 weeks) — Schema & table design (5 backend developers)
@@ -651,3 +651,54 @@ Together, these factors significantly boost productivity and reduce cognitive ov
   * strong developer experience and fast feedback loops,
   * and a high proportion of repetitive / scaffoldable code.
 
+---
+
+
+### Plan C: based on 3 backend (*+ 2 frontend + 1 UX*) developers in 3 months to develop a demo ERP system
+
+* Production LOC (target): 162,000
+* Test LOC (target): 0 (*No test code*)
+* → **Total LOC**: **162,000**
+
+ 
+#### Day 1–10 (10 working days, ~2 weeks) — Schema & table design (3 backend developers)
+
+* Task: design **100 tables**, ~**30 columns/table** on average.
+* Throughput: ~**3.3 tables per developer per day**.
+
+---
+
+#### Day 11-15 (5 working days, ~1 week) — Code generation review
+
+* Task: generated **100 Entity classes**, **100 DTO classes**, **100 DAO classes** by tools and review them.
+
+  * Entity ≈ **100 LOC** each → 10,000 LOC
+  * DTO ≈ **100 LOC** each → 10,000 LOC
+  * DAO ≈ **300 LOC** each → 30,000 LOC
+  * → **Generated total** = **50,000 LOC**
+
+* Throughput: ~**6.6 tables x 3 Entity/DTO/DAO classes = 20 classes per developer per day**.
+* Since this code is generated, **most of it requires little to no hand-coding**.
+* Practical effort estimate for Day 11-15 (including reviews, minor edits, and test scaffolding): **50,000 LOC equivalent completed**.
+
+---
+
+#### Day 16-25 (10 working days, ~2 weeks) — Common controller/service scaffolding
+
+* Goal: set up common patterns and shared framework at controller/service level.
+* Each developer is responsible for **33 tables** → **33 tables × 3 APIs/table = 100 APIs per developer** (these are scaffolding endpoints that follow a shared pattern).
+* Productivity assumption: each developer completes **~10,000 production LOC** across 10 days → **10,000 × 3 = 30,000 production LOC** total.
+
+---
+
+#### Next 26-70 (45 working days, ~2 months) — Implement API logic per table
+
+* Per developer responsibilities: *33 tables → 100 APIs**.
+* Estimated LOC per API:
+
+  * Controller: **100 LOC**
+  * Service: **200 LOC**
+  * DAL: **150 LOC**
+  * → **450 production LOC / API**
+* Per developer production work for 100 APIs: **100 × 450 = 45,000 LOC**.
+* For **3 developers**: **45,000 × 3 = 135,000 LOC** delivered in two months.
