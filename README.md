@@ -517,7 +517,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Plan A: based 20 backend developers.
+### Plan A: based on 20 backend developers.
 
 #### Day 1–2 (2 working days) — Schema & table design
 
@@ -565,7 +565,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Can this be reduced by reuse / AI?
+#### Can this be reduced by reuse / AI?
 
 * If **half of the production code is boilerplate / highly similar**, then production LOC per dev over 10 days could drop from **6,750 → 3,375 LOC** (50% reduction).
 * If **AI generates 50% of the test code**, test LOC per dev drops from **6,750 → 3,375 LOC**.
@@ -573,26 +573,20 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
   * **3,375 production + 3,375 test = 6,750 LOC** each.
   
-* Question: **Is ~6,750 LOC per developer in 10 days realistic?** That equals **675 LOC/day** (assuming 10 working days) — very unlikely.
+* Question: **Is ~6,750 LOC per developer in 10 days realistic?** That equals **675 LOC/day** (assuming 10 working days) — **very unlikely due to the very short period**.
 
 ---
 
-### Summary / Conclusion
+#### Summary / Conclusion
 
 * Baseline schedule produces **~486K LOC** across design, generated code, scaffolding, and per-API work assuming 20 backend developers and heavy use of generation + patterns.
-* With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 10-day implementation sprint could be reduced to **~6,750 LOC** (≈675 LOC/day) — achievable only under highly controlled conditions:
-
-  * excellent generation tooling and templates,
-  * very consistent API patterns,
-  * minimal context switching,
-  * strong developer experience and fast feedback loops,
-  * and a high proportion of repetitive / scaffoldable code.
+* With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 10-day implementation sprint could be reduced to **~6,750 LOC** (≈675 LOC/day) — **very unlikely due to the very short period**.
 
 
 ---
 
 
-### Plan B: based 5 backend developers.
+### Plan B: based on 5 backend developers.
 
  
 #### Day 1–8 (8 working days) — Schema & table design (5 backend developers)
