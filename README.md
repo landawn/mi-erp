@@ -589,14 +589,14 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 ### Plan B: based on 5 backend developers.
 
  
-#### Day 1–8 (8 working days) — Schema & table design (5 backend developers)
+#### Day 1–8 (8 working days, ~2 weeks) — Schema & table design (5 backend developers)
 
 * Task: design **100 tables**, ~**30 columns/table** on average.
 * Throughput: ~**2.5 tables per developer per day**.
 
 ---
 
-#### Day 9-12 (4 working days) — Code generation review
+#### Day 9-12 (4 working days, ~1 week) — Code generation review
 
 * Task: generated **100 Entity classes**, **100 DTO classes**, **100 DAO classes** by tools and review them.
 
@@ -611,7 +611,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-#### Day 13-20 (8 working days) — Common controller/service scaffolding
+#### Day 13-20 (8 working days, ~2 weeks) — Common controller/service scaffolding
 
 * Goal: set up common patterns and shared framework at controller/service level.
 * Each developer is responsible for **20 tables** → **20 tables × 3 APIs/table = 60 APIs per developer** (these are scaffolding endpoints that follow a shared pattern).
@@ -620,7 +620,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-#### Next 21-60 (40 working days) — Implement API logic per table
+#### Next 21-60 (40 working days, ~ 2 months) — Implement API logic per table
 
 * Per developer responsibilities: *20 tables → 60 APIs**.
 * Estimated LOC per API:
@@ -651,7 +651,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 #### Summary / Conclusion
 
 * Baseline schedule produces **~486K LOC** across design, generated code, scaffolding, and per-API work assuming 5 backend developers and heavy use of generation + patterns.
-* With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day implementation sprint could be reduced to **~27,000 LOC** (≈675 LOC/day) — achievable only under highly controlled conditions:
+* With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day (2 months) implementation sprint could be reduced to **~27,000 LOC** (≈675 LOC/day) — achievable only under highly controlled conditions:
 
   * excellent generation tooling and templates,
   * very consistent API patterns,
