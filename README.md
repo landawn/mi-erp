@@ -517,7 +517,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Plan A: based on 20 backend developers.
+### Plan A: based on 20 backend developers in one month.
 
 #### Day 1–2 (2 working days) — Schema & table design
 
@@ -586,7 +586,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 ---
 
 
-### Plan B: based on 5 backend developers.
+### Plan B: based on 5 backend developers in three months.
 
  
 #### Day 1–8 (8 working days, ~2 weeks) — Schema & table design (5 backend developers)
