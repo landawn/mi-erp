@@ -607,7 +607,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 * Throughput: ~**5 tables x 3 Entity/DTO/DAO classes = 15 classes per developer per day**.
 * Since this code is generated, **most of it requires little to no hand-coding**.
-* Practical effort estimate for Day 9-12 (including reviews, minor edits, and test scaffolding): **150,000 LOC equivalent completed** = 50,000 production LOC + 100,000 test LOC.
+* Practical effort estimate for Day 9-12 (including reviews, minor edits, and test scaffolding): **100,000 LOC equivalent completed** = 50,000 production LOC + 50,000 test LOC.
 
 ---
 
@@ -616,7 +616,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 * Goal: set up common patterns and shared framework at controller/service level.
 * Each developer is responsible for **20 tables** → **20 tables × 3 APIs/table = 60 APIs per developer** (these are scaffolding endpoints that follow a shared pattern).
 * Productivity assumption: each developer completes **~8,000 production LOC** across eight days → **8,000 × 5 = 40,000 production LOC** total.
-* Testing for framework-level code is lighter, but counting effort conservatively: **total Day 13-20 deliverable = 120,000 LOC equivalent** = 40,000 production + 80,000 test LOC.
+* Testing for framework-level code is lighter, but counting effort conservatively: **total Day 13-20 deliverable = 80,000 LOC equivalent** = 40,000 production + 40,000 test LOC.
 
 ---
 
@@ -650,7 +650,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 #### Summary / Conclusion
 
-* With heavy use of generation + patterns, 5 backend developers produce **~270K LOC** across design, generated code, scaffolding in the first 5 weeks.
+* With heavy use of generation + patterns, 5 backend developers produce **~180K LOC** across design, generated code, scaffolding in the first 5 weeks.
 * With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day (2 months) implementation sprint could be reduced to **~27,000 LOC** (≈675 LOC/day) — achievable only under highly controlled conditions:
 
   * excellent generation tooling and templates,
