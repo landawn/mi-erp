@@ -487,18 +487,18 @@ $$
 $$
 
 ### The Reality Gap
-1.  **Required Output:** 900 lines per day, per person.
-2.  **Industry Average:** 20-50 lines of *finished, debugged* code per day for complex enterprise systems—*low, with plenty of room for improvement*
-3.  **Discrepancy:** The plan requires a pace **18x–45x faster** than the industry standard.
+*  **Required Output:** 900 lines per day, per person.
+*  **Industry Average:** 20-50 lines of *finished, debugged* code per day for complex enterprise systems—*low, with plenty of room for improvement*
+*  **Discrepancy:** The plan requires a pace **18x–45x faster** than the industry standard.
 
 
-* **I believe it's still achievable under exceptional conditions**:
+### However I believe it's still achievable under exceptional conditions**:
 
-    * **Highly mature frameworks** (e.g., *JDK 25+*, *Spring 7+*).
-    * **Extremely productive libraries and tooling** (e.g., *abacus-common*, *abacus-jdbc*).
-    * **Small, efficient teams with fast communication loops**.
-    * **Very strong individual engineers**.
-    * *AI-assisted development and automation*.
+* **Highly mature frameworks** (e.g., *JDK 25+*, *Spring 7+*).
+* **Extremely productive libraries and tooling** (e.g., *abacus-common*, *abacus-jdbc*).
+* **Small, efficient teams with fast communication loops**.
+* **Very strong individual engineers**.
+* *AI-assisted development and automation*.
 
   All of these factors not only improve productivity, but also reduce cognitive load, making coding easier, simpler, and faster.
 ---
