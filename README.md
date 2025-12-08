@@ -509,7 +509,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Story One: 100 tables (baseline assumptions)
+### Example: 100 tables (baseline assumptions)
 
 * Production LOC (target)**: **162,000
 * Test LOC (target)**: **324,000
@@ -517,14 +517,16 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Day 1–2 — Schema & table design (20 backend developers)
+### Plan A: based 20 backend developers.
+
+#### Day 1–2 — Schema & table design
 
 * Task: design **100 tables**, ~**30 columns/table** on average.
 * Throughput: ~**2.5 tables per developer per day**.
 
 ---
 
-### Day 3 — Code generation review
+#### Day 3 — Code generation review
 
 * A tool generates: **100 Entity classes**, **100 DTO classes**, **100 DAO classes**.
 
@@ -586,25 +588,21 @@ Together, these factors significantly boost productivity and reduce cognitive ov
   * strong developer experience and fast feedback loops,
   * and a high proportion of repetitive / scaffoldable code.
 
----
-
-
-### Story two: 100 tables (baseline assumptions)
-
-* Production LOC (target)**: **162,000
-* Test LOC (target)**: **324,000
-* → **Total LOC**: **486,000**
 
 ---
 
-### Day 1–8 (8 working days) — Schema & table design (5 backend developers)
+
+### Plan B: based 5 backend developers.
+
+ 
+#### Day 1–8 (8 working days) — Schema & table design (5 backend developers)
 
 * Task: design **100 tables**, ~**30 columns/table** on average.
 * Throughput: ~**2.5 tables per developer per day**.
 
 ---
 
-### Day 9-12 (4 working days) — Code generation review
+#### Day 9-12 (4 working days) — Code generation review
 
 * Task: generated **100 Entity classes**, **100 DTO classes**, **100 DAO classes** by tools and review them.
 
