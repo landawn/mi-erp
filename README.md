@@ -650,7 +650,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 #### Summary / Conclusion
 
-* Baseline schedule produces **~270K LOC** across design, generated code, scaffolding, and per-API work assuming 5 backend developers in 5 weeks and heavy use of generation + patterns.
+* With heavy use of generation + patterns, 5 backend developers produce **~270K LOC** across design, generated code, scaffolding in the first 5 weeks.
 * With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day (2 months) implementation sprint could be reduced to **~27,000 LOC** (≈675 LOC/day) — achievable only under highly controlled conditions:
 
   * excellent generation tooling and templates,
