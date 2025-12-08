@@ -492,7 +492,7 @@ $$
 *  **Discrepancy:** The plan requires a pace **18x–45x faster** than the industry standard.
 
 
-### However I believe it's still achievable under exceptional conditions**:
+### However I believe it's still achievable under exceptional conditions:
 
 * **Highly mature frameworks** (e.g., *JDK 25+*, *Spring 7+*).
 * **Extremely productive libraries and tooling** (e.g., *abacus-common*, *abacus-jdbc*).
@@ -500,7 +500,8 @@ $$
 * **Very strong individual engineers**.
 * *AI-assisted development and automation*.
 
-  All of these factors not only improve productivity, but also reduce cognitive load, making coding easier, simpler, and faster.
+All of these factors not only improve productivity, but also reduce cognitive load, making coding easier, simpler, and faster.
+
 ---
  
  
