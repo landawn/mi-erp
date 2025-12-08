@@ -511,8 +511,8 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ### Example: 100 tables (baseline assumptions)
 
-* Production LOC (target)**: **162,000
-* Test LOC (target)**: **324,000
+* **Production LOC (target)**: **162,000**
+* **Test LOC (target)**: **324,000**
 * → **Total LOC**: **486,000**
 
 ---
@@ -536,7 +536,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
   * → **Generated total** = **50,000 LOC**
 
 * Since this code is generated, **most of it requires little to no hand-coding**.
-* Practical effort estimate for Day 3 (including reviews, minor edits, and test scaffolding): **150,000 LOC equivalent completed** = 50,000 production LOC + 100,000 test LOC.
+* Practical effort estimate for Day 3 (including reviews, minor edits, and test scaffolding): **100,000 LOC equivalent completed** = 50,000 production LOC + 50,000 test LOC (*ratio=1*).
 
 ---
 
@@ -545,7 +545,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 * Goal: set up common patterns and shared framework at controller/service level.
 * Each developer is responsible for **5 tables** → **5 tables × 3 APIs/table = 15 APIs per developer** (these are scaffolding endpoints that follow a shared pattern).
 * Productivity assumption: each developer completes **~2,000 production LOC** across two days → **2,000 × 20 = 40,000 production LOC** total.
-* Testing for framework-level code is lighter, but counting effort conservatively: **total Day 4–5 deliverable = 120,000 LOC equivalent** = 40,000 production + 80,000 test LOC.
+* Testing for framework-level code is lighter, but counting effort conservatively: **total Day 4–5 deliverable = 80,000 LOC equivalent** = 40,000 production + 40,000 test LOC (*ratio=1*).
 
 ---
 
@@ -577,14 +577,6 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-#### Summary / Conclusion
-
-* Baseline schedule produces **~486K LOC** across design, generated code, scaffolding, and per-API work assuming 20 backend developers and heavy use of generation + patterns.
-* With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 10-day implementation sprint could be reduced to **~6,750 LOC** (≈675 LOC/day) — **very unlikely due to the very short period**.
-
-
----
-
 
 ### Plan B: based on 5 backend developers in three months.
 
@@ -607,7 +599,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 * Throughput: ~**5 tables x 3 Entity/DTO/DAO classes = 15 classes per developer per day**.
 * Since this code is generated, **most of it requires little to no hand-coding**.
-* Practical effort estimate for Day 9-12 (including reviews, minor edits, and test scaffolding): **100,000 LOC equivalent completed** = 50,000 production LOC + 50,000 test LOC.
+* Practical effort estimate for Day 9-12 (including reviews, minor edits, and test scaffolding): **100,000 LOC equivalent completed** = 50,000 production LOC + 50,000 test LOC (*ratio=1*).
 
 ---
 
@@ -616,7 +608,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 * Goal: set up common patterns and shared framework at controller/service level.
 * Each developer is responsible for **20 tables** → **20 tables × 3 APIs/table = 60 APIs per developer** (these are scaffolding endpoints that follow a shared pattern).
 * Productivity assumption: each developer completes **~8,000 production LOC** across eight days → **8,000 × 5 = 40,000 production LOC** total.
-* Testing for framework-level code is lighter, but counting effort conservatively: **total Day 13-20 deliverable = 80,000 LOC equivalent** = 40,000 production + 40,000 test LOC.
+* Testing for framework-level code is lighter, but counting effort conservatively: **total Day 13-20 deliverable = 80,000 LOC equivalent** = 40,000 production + 40,000 test LOC (*ratio=1*).
 
 ---
 
