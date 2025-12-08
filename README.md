@@ -511,8 +511,8 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ### Example: 100 tables (baseline assumptions)
 
-* **Production LOC (target)**: **162,000**
-* **Test LOC (target)**: **324,000**
+* Production LOC (target)**: **162,000
+* Test LOC (target)**: **324,000
 * → **Total LOC**: **486,000**
 
 ---
