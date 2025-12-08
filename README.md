@@ -492,10 +492,10 @@ $$
 *  **Discrepancy:** The plan requires a pace **18x–45x faster** than the industry standard.
 
 
-### However, I believe it is still achievable under certain exceptional conditions:
+### Nonetheless, I believe it is still achievable under certain exceptional conditions:
 
 * **Highly mature frameworks** (e.g., *JDK 25+*, *Spring 7+*).
-* **Extremely productive libraries and tooling** (e.g., *log4j2*, *Jackson8, *Guava*, *abacus-common*, *abacus-jdbc*).
+* **Extremely productive libraries and tooling** (e.g., *log4j2*, *Jackson8*, *Guava*, *abacus-common*, *abacus-jdbc*).
 * **Small, highly efficient teams with rapid communication** (e.g., *80% coding / 20% coordination*).
 * **Very strong senior/10x engineers**.
 * *AI-assisted development and automation*.
