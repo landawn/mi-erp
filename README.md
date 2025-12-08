@@ -519,14 +519,14 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ### Plan A: based 20 backend developers.
 
-#### Day 1–2 — Schema & table design
+#### Day 1–2 (2 working days) — Schema & table design
 
 * Task: design **100 tables**, ~**30 columns/table** on average.
 * Throughput: ~**2.5 tables per developer per day**.
 
 ---
 
-#### Day 3 — Code generation review
+#### Day 3 (1 working day) — Code generation review
 
 * A tool generates: **100 Entity classes**, **100 DTO classes**, **100 DAO classes**.
 
@@ -540,7 +540,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Day 4–5 — Common controller/service scaffolding
+#### Day 4–5 (2 working days) — Common controller/service scaffolding
 
 * Goal: set up common patterns and shared framework at controller/service level.
 * Each developer is responsible for **5 tables** → **5 tables × 3 APIs/table = 15 APIs per developer** (these are scaffolding endpoints that follow a shared pattern).
@@ -549,7 +549,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Next 10 working days (two weeks) — Implement API logic per table
+#### Day 6-15 (10 working days) — Implement API logic per table
 
 * Per developer responsibilities: **5 tables → 15 APIs**.
 * Estimated LOC per API:
@@ -561,7 +561,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 * Per developer production work for 15 APIs: **15 × 450 = 6,750 LOC**.
 * Mirror testing estimate: **6,750 test LOC**.
 * **Total per developer** over 10 days: **13,500 LOC** (6,750 production + 6,750 test).
-* For **20 developers**: **13,500 × 20 = 270,000 LOC** delivered in those 10 days.
+* For **20 developers**: **13,500 × 20 = 270,000 LOC** delivered in those 10 working days.
 
 ---
 
@@ -569,7 +569,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 * If **half of the production code is boilerplate / highly similar**, then production LOC per dev over 10 days could drop from **6,750 → 3,375 LOC** (50% reduction).
 * If **AI generates 50% of the test code**, test LOC per dev drops from **6,750 → 3,375 LOC**.
-* Under those optimistic assumptions, per-developer hand-written LOC over the 10 days becomes:
+* Under those optimistic assumptions, per-developer hand-written LOC over the 10 working days becomes:
 
   * **3,375 production + 3,375 test = 6,750 LOC** each.
   
@@ -617,7 +617,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Day 13-20 (8 working days) — Common controller/service scaffolding
+#### Day 13-20 (8 working days) — Common controller/service scaffolding
 
 * Goal: set up common patterns and shared framework at controller/service level.
 * Each developer is responsible for **20 tables** → **20 tables × 3 APIs/table = 60 APIs per developer** (these are scaffolding endpoints that follow a shared pattern).
@@ -626,7 +626,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Next 21-60 (40 working days) — Implement API logic per table
+#### Next 21-60 (40 working days) — Implement API logic per table
 
 * Per developer responsibilities: *20 tables → 60 APIs**.
 * Estimated LOC per API:
@@ -642,7 +642,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Can this be reduced by reuse / AI?
+#### Can this be reduced by reuse / AI?
 
 * If **half of the production code is boilerplate / highly similar**, then production LOC per dev over 40 days could drop from **27,000 → 13,500 LOC** (50% reduction).
 * If **AI generates 50% of the test code**, test LOC per dev drops from **27,000 → 13,500 LOC**.
@@ -654,7 +654,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Summary / Conclusion
+#### Summary / Conclusion
 
 * Baseline schedule produces **~486K LOC** across design, generated code, scaffolding, and per-API work assuming 5 backend developers and heavy use of generation + patterns.
 * With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day implementation sprint could be reduced to **~27,000 LOC** (≈675 LOC/day) — achievable only under highly controlled conditions:
