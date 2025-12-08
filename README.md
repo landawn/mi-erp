@@ -513,7 +513,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 * **Production LOC (target)**: **162,000**
 * **Test LOC (target)**: **324,000**
-* **Total LOC**: **486,000**
+* → **Total LOC**: **486,000**
 
 ---
 
@@ -531,7 +531,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
   * Entity ≈ **100 LOC** each → 10,000 LOC
   * DTO ≈ **100 LOC** each → 10,000 LOC
   * DAO ≈ **300 LOC** each → 30,000 LOC
-  * **Generated total** = **50,000 LOC**
+  * → **Generated total** = **50,000 LOC**
 
 * Since this code is generated, **most of it requires little to no hand-coding**.
 * Practical effort estimate for Day 3 (including reviews, minor edits, and test scaffolding): **150,000 LOC equivalent completed** = 50,000 production LOC + 100,000 test LOC.
@@ -555,7 +555,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
   * Controller: **100 LOC**
   * Service: **200 LOC**
   * DAL: **150 LOC**
-    → **450 production LOC / API**
+  * → **450 production LOC / API**
 * Per developer production work for 15 APIs: **15 × 450 = 6,750 LOC**.
 * Mirror testing estimate: **6,750 test LOC**.
 * **Total per developer** over 10 days: **13,500 LOC** (6,750 production + 6,750 test).
