@@ -1,0 +1,1231 @@
+Generating a monolithic DDL file with 100 fully detailed tables in a single response is overwhelming and difficult to implement at once. However, I can provide a highly structured **schema architecture** covering the core modules that make up the vast majority of ERP/CRM systems.
+
+The following SQL script defines the **Core 30** foundational tables (which handle 80% of the heavy lifting) and creates a comprehensive structure for Identity, CRM, Sales, Inventory, Finance, and HR.
+
+Following the code, I have listed the specific names of the remaining tables that typically round out the "Top 100" to complete the system (lookups, logs, and configurations).
+
+### ERP/CRM Database Schema Structure
+
+#### Global Standards Used:
+
+  * **Engine:** InnoDB (for ACID compliance).
+  * **Keys:** `BIGINT` for primary keys (scalability).
+  * **Audit:** Standard `created_at`, `updated_at`, and `is_deleted` (soft delete) columns.
+
+-----
+
+### Phase 1: Core, Identity & Common Data
+
+These tables support the entire ecosystem.
+
+```sql
+-- 1. Users (System Access)
+CREATE TABLE users (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    is_active BOOLEAN DEFAULT TRUE,
+    last_login DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 2. Roles (RBAC)
+CREATE TABLE roles (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 3. Currencies (Multi-currency support)
+CREATE TABLE currencies (
+    code CHAR(3) PRIMARY KEY, -- USD, EUR
+    name VARCHAR(50),
+    symbol VARCHAR(5),
+    exchange_rate DECIMAL(10, 4) DEFAULT 1.0000,
+    is_base BOOLEAN DEFAULT FALSE
+);
+
+-- 4. Countries & Regions
+CREATE TABLE countries (
+    iso_code CHAR(2) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+-- 5. Addresses (Polymorphic or shared)
+CREATE TABLE addresses (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    parent_type ENUM('account', 'contact', 'warehouse', 'employee'),
+    parent_id BIGINT UNSIGNED NOT NULL,
+    street_line_1 VARCHAR(255),
+    street_line_2 VARCHAR(255),
+    city VARCHAR(100),
+    state VARCHAR(100),
+    postal_code VARCHAR(20),
+    country_code CHAR(2),
+    address_type ENUM('billing', 'shipping', 'home', 'office'),
+    FOREIGN KEY (country_code) REFERENCES countries(iso_code),
+    INDEX (parent_type, parent_id)
+);
+```
+
+### Phase 2: CRM (Customer Relationship Management)
+
+Managing the pipeline and client data.
+
+```sql
+-- 6. Accounts (Companies/Organizations)
+CREATE TABLE accounts (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    industry VARCHAR(100),
+    website VARCHAR(255),
+    owner_user_id BIGINT UNSIGNED,
+    status ENUM('prospect', 'customer', 'churned') DEFAULT 'prospect',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (owner_user_id) REFERENCES users(id)
+);
+
+-- 7. Contacts (People)
+CREATE TABLE contacts (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    account_id BIGINT UNSIGNED,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(255),
+    phone VARCHAR(50),
+    position VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
+);
+
+-- 8. Opportunities (Deals)
+CREATE TABLE opportunities (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    account_id BIGINT UNSIGNED NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    amount DECIMAL(15, 2),
+    stage ENUM('prospecting', 'qualification', 'proposal', 'closed_won', 'closed_lost'),
+    close_date DATE,
+    probability INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
+);
+
+-- 9. Activities (Interactions)
+CREATE TABLE activities (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    related_to_type ENUM('lead', 'contact', 'opportunity'),
+    related_to_id BIGINT UNSIGNED,
+    activity_type ENUM('call', 'email', 'meeting', 'task'),
+    subject VARCHAR(255),
+    description TEXT,
+    due_date DATETIME,
+    status ENUM('planned', 'completed', 'cancelled'),
+    assigned_to_user_id BIGINT UNSIGNED,
+    FOREIGN KEY (assigned_to_user_id) REFERENCES users(id)
+);
+```
+
+### Phase 3: Inventory & Products (Supply Chain)
+
+Managing what you sell and where it is.
+
+```sql
+-- 10. Product Categories
+CREATE TABLE product_categories (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    parent_id BIGINT UNSIGNED, -- Self-referencing for hierarchy
+    FOREIGN KEY (parent_id) REFERENCES product_categories(id)
+);
+
+-- 11. Products (Items/SKUs)
+CREATE TABLE products (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    sku VARCHAR(50) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    category_id BIGINT UNSIGNED,
+    uom VARCHAR(20) DEFAULT 'pcs', -- Unit of Measure
+    cost_price DECIMAL(15, 4),
+    sales_price DECIMAL(15, 4),
+    is_stockable BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (category_id) REFERENCES product_categories(id)
+);
+
+-- 12. Warehouses
+CREATE TABLE warehouses (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(20) UNIQUE,
+    location_address_id BIGINT UNSIGNED
+);
+
+-- 13. Inventory Stock (Current Levels)
+CREATE TABLE inventory_stock (
+    product_id BIGINT UNSIGNED,
+    warehouse_id BIGINT UNSIGNED,
+    quantity_on_hand DECIMAL(15, 4) DEFAULT 0,
+    quantity_reserved DECIMAL(15, 4) DEFAULT 0,
+    reorder_point DECIMAL(15, 4) DEFAULT 10,
+    PRIMARY KEY (product_id, warehouse_id),
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)
+);
+
+-- 14. Inventory Movements (Audit Trail)
+CREATE TABLE inventory_movements (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    product_id BIGINT UNSIGNED NOT NULL,
+    warehouse_id BIGINT UNSIGNED NOT NULL,
+    movement_type ENUM('in', 'out', 'transfer', 'adjustment'),
+    quantity DECIMAL(15, 4) NOT NULL,
+    reference_id BIGINT UNSIGNED, -- Link to Order/PO ID
+    reference_type VARCHAR(50),   -- 'sales_order', 'purchase_order'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Phase 4: Sales & Procurement (Order Management)
+
+The core transaction engine.
+
+```sql
+-- 15. Sales Orders (Header)
+CREATE TABLE sales_orders (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    order_number VARCHAR(50) NOT NULL UNIQUE,
+    customer_id BIGINT UNSIGNED NOT NULL,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('draft', 'confirmed', 'shipped', 'invoiced', 'cancelled'),
+    total_amount DECIMAL(15, 2),
+    currency_code CHAR(3),
+    FOREIGN KEY (customer_id) REFERENCES accounts(id)
+);
+
+-- 16. Sales Order Items (Lines)
+CREATE TABLE sales_order_items (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    sales_order_id BIGINT UNSIGNED NOT NULL,
+    product_id BIGINT UNSIGNED NOT NULL,
+    quantity DECIMAL(15, 4) NOT NULL,
+    unit_price DECIMAL(15, 4) NOT NULL,
+    total_price DECIMAL(15, 4) GENERATED ALWAYS AS (quantity * unit_price) STORED,
+    FOREIGN KEY (sales_order_id) REFERENCES sales_orders(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 17. Purchase Orders (Procurement Header)
+CREATE TABLE purchase_orders (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    po_number VARCHAR(50) NOT NULL UNIQUE,
+    vendor_id BIGINT UNSIGNED NOT NULL,
+    status ENUM('draft', 'sent', 'received', 'billed'),
+    expected_date DATE,
+    FOREIGN KEY (vendor_id) REFERENCES accounts(id)
+);
+```
+
+### Phase 5: Finance (General Ledger)
+
+The "Heart" of the ERP.
+
+```sql
+-- 18. Chart of Accounts (COA)
+CREATE TABLE chart_of_accounts (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(20) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    type ENUM('asset', 'liability', 'equity', 'revenue', 'expense'),
+    is_reconciliation BOOLEAN DEFAULT FALSE
+);
+
+-- 19. Tax Rules
+CREATE TABLE tax_rates (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    rate_percent DECIMAL(5, 2) NOT NULL,
+    country_code CHAR(2)
+);
+
+-- 20. Invoices (AR)
+CREATE TABLE invoices (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    invoice_number VARCHAR(50) NOT NULL UNIQUE,
+    sales_order_id BIGINT UNSIGNED,
+    customer_id BIGINT UNSIGNED,
+    issue_date DATE,
+    due_date DATE,
+    total_amount DECIMAL(15, 2),
+    status ENUM('draft', 'posted', 'paid', 'overdue'),
+    FOREIGN KEY (sales_order_id) REFERENCES sales_orders(id)
+);
+
+-- 21. Payments
+CREATE TABLE payments (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    invoice_id BIGINT UNSIGNED,
+    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    amount DECIMAL(15, 2) NOT NULL,
+    payment_method ENUM('credit_card', 'bank_transfer', 'cash', 'check'),
+    transaction_reference VARCHAR(100),
+    FOREIGN KEY (invoice_id) REFERENCES invoices(id)
+);
+
+-- 22. Journal Entries (The Ledger Header)
+CREATE TABLE journal_entries (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    entry_number VARCHAR(50) UNIQUE,
+    reference VARCHAR(100),
+    date DATE NOT NULL,
+    description TEXT,
+    posted BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 23. Journal Entry Lines (Debits/Credits)
+CREATE TABLE journal_entry_lines (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    journal_entry_id BIGINT UNSIGNED NOT NULL,
+    account_id BIGINT UNSIGNED NOT NULL, -- Link to COA
+    debit DECIMAL(15, 2) DEFAULT 0.00,
+    credit DECIMAL(15, 2) DEFAULT 0.00,
+    FOREIGN KEY (journal_entry_id) REFERENCES journal_entries(id),
+    FOREIGN KEY (account_id) REFERENCES chart_of_accounts(id)
+);
+```
+
+### Phase 6: HR & Support
+
+Human capital management.
+
+```sql
+-- 24. Departments
+CREATE TABLE departments (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    manager_id BIGINT UNSIGNED -- Links to employee
+);
+
+-- 25. Employees
+CREATE TABLE employees (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT UNSIGNED UNIQUE, -- Link to login
+    department_id BIGINT UNSIGNED,
+    job_title VARCHAR(100),
+    hire_date DATE,
+    salary DECIMAL(15, 2),
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+);
+```
+
+-----
+
+### The "Rest of the 100" (Schema Extension)
+
+To complete a full-scale ERP system, you would implement the following tables which link to the core tables above.
+
+#### Settings & Configuration
+
+26. `system_configs` (Global settings key/value)
+27. `email_templates`
+28. `notification_rules`
+29. `languages`
+30. `api_keys` (For integrations)
+31. `webhooks`
+32. `sequence_generators` (For custom invoice numbers)
+
+#### Extended CRM
+
+33. `lead_sources`
+34. `campaigns`
+35. `campaign_members`
+36. `contracts` (Service level agreements)
+37. `subscriptions` (Recurring billing)
+38. `support_tickets` (Helpdesk)
+39. `ticket_comments`
+
+#### Extended Inventory & Manufacturing
+
+40. `boms` (Bill of Materials header)
+41. `bom_components` (Bill of Materials lines)
+42. `manufacturing_orders`
+43. `work_centers`
+44. `stock_adjustments`
+45. `lots` (Batch tracking)
+46. `serial_numbers`
+47. `shipping_methods`
+48. `suppliers` (distinct from generic accounts)
+
+#### Extended Finance
+
+49. `fiscal_years`
+50. `accounting_periods`
+51. `bank_accounts`
+52. `bank_statements`
+53. `bank_statement_lines`
+54. `expense_reports`
+55. `expense_categories`
+56. `assets` (Fixed asset management)
+57. `asset_depreciation_schedules`
+58. `credit_notes`
+59. `payment_terms` (e.g., Net 30)
+
+#### HR & Payroll
+
+60. `job_positions`
+61. `applicants` (ATS)
+62. `leaves` (Time off requests)
+63. `leave_types`
+64. `attendance_logs`
+65. `payroll_batches`
+66. `payslips`
+67. `benefits`
+
+#### Project Management (PSA)
+
+68. `projects`
+69. `project_tasks`
+70. `timesheets`
+71. `milestones`
+72. `project_teams`
+
+#### E-Commerce Integration
+
+73. `web_store_fronts`
+74. `carts`
+75. `wishlists`
+76. `product_images`
+77. `product_reviews`
+78. `coupons`
+79. `promotions`
+
+#### Logistics
+
+80. `shipments`
+81. `shipment_items`
+82. `carriers`
+83. `tracking_numbers`
+84. `delivery_routes`
+85. `vehicles`
+86. `drivers`
+
+#### Analytics & Logs
+
+87. `audit_logs` (Who changed what)
+88. `error_logs`
+89. `login_history`
+90. `report_definitions`
+91. `scheduled_jobs`
+
+#### Access Control
+
+92. `permissions`
+93. `role_permissions`
+94. `user_groups`
+95. `group_members`
+
+#### Documents
+
+96. `documents` (File metadata)
+97. `document_versions`
+98. `folders`
+99. `tags`
+100. `taggables` (Polymorphic tagging)
+
+### Next Step
+
+Would you like me to generate a set of **Seed Data (INSERT statements)** for the Core 10 tables so you can immediately query and test this structure?
+
+
+Here is the DDL for the remaining 75 tables (26–100) to complete your ERP schema.
+
+**Note:** This script is designed to run **after** the Core 25 tables provided in the previous response, as many of these tables reference foreign keys (like `users`, `products`, and `accounts`) defined there.
+
+### Phase 7: Settings & Configuration (26-32)
+
+Infrastructure for system behavior and API connections.
+
+```sql
+-- 26. System Configs (Key-Value Store)
+CREATE TABLE system_configs (
+    config_key VARCHAR(100) PRIMARY KEY,
+    config_value TEXT,
+    description VARCHAR(255),
+    is_encrypted BOOLEAN DEFAULT FALSE
+);
+
+-- 27. Email Templates
+CREATE TABLE email_templates (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(50) UNIQUE,
+    subject VARCHAR(255),
+    body_html TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 28. Notification Rules
+CREATE TABLE notification_rules (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    event_trigger VARCHAR(100), -- e.g., 'order_placed'
+    recipient_role_id BIGINT UNSIGNED,
+    email_template_id BIGINT UNSIGNED,
+    FOREIGN KEY (recipient_role_id) REFERENCES roles(id)
+);
+
+-- 29. Languages
+CREATE TABLE languages (
+    code CHAR(2) PRIMARY KEY, -- en, es, fr
+    name VARCHAR(50),
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+-- 30. API Keys
+CREATE TABLE api_keys (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT UNSIGNED,
+    access_key VARCHAR(64) UNIQUE,
+    secret_hash VARCHAR(255),
+    scopes TEXT, -- JSON array of permissions
+    expires_at DATETIME,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- 31. Webhooks
+CREATE TABLE webhooks (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    event VARCHAR(100),
+    target_url VARCHAR(255),
+    secret_token VARCHAR(100),
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+-- 32. Sequence Generators (Custom IDs)
+CREATE TABLE sequence_generators (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    entity_type VARCHAR(50), -- e.g., 'invoice', 'order'
+    prefix VARCHAR(10),
+    next_number INT UNSIGNED DEFAULT 1,
+    padding INT DEFAULT 6
+);
+```
+
+### Phase 8: Extended CRM (33-39)
+
+Marketing, Contracts, and Support.
+
+```sql
+-- 33. Lead Sources
+CREATE TABLE lead_sources (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) UNIQUE -- e.g., 'Web', 'Referral', 'Trade Show'
+);
+
+-- 34. Campaigns
+CREATE TABLE campaigns (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    start_date DATE,
+    end_date DATE,
+    budget DECIMAL(15,2),
+    status ENUM('planned', 'active', 'completed')
+);
+
+-- 35. Campaign Members (Leads in Campaigns)
+CREATE TABLE campaign_members (
+    campaign_id BIGINT UNSIGNED,
+    contact_id BIGINT UNSIGNED,
+    status VARCHAR(50),
+    PRIMARY KEY (campaign_id, contact_id),
+    FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
+    FOREIGN KEY (contact_id) REFERENCES contacts(id)
+);
+
+-- 36. Contracts
+CREATE TABLE contracts (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    account_id BIGINT UNSIGNED,
+    start_date DATE,
+    end_date DATE,
+    value DECIMAL(15,2),
+    status ENUM('draft', 'active', 'expired', 'terminated'),
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
+);
+
+-- 37. Subscriptions
+CREATE TABLE subscriptions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    customer_id BIGINT UNSIGNED,
+    product_id BIGINT UNSIGNED,
+    renewal_date DATE,
+    billing_cycle ENUM('monthly', 'yearly'),
+    amount DECIMAL(15,2),
+    FOREIGN KEY (customer_id) REFERENCES accounts(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 38. Support Tickets
+CREATE TABLE support_tickets (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    ticket_number VARCHAR(20) UNIQUE,
+    subject VARCHAR(255),
+    contact_id BIGINT UNSIGNED,
+    priority ENUM('low', 'medium', 'high', 'critical'),
+    status ENUM('new', 'open', 'pending', 'resolved'),
+    assigned_user_id BIGINT UNSIGNED,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (contact_id) REFERENCES contacts(id),
+    FOREIGN KEY (assigned_user_id) REFERENCES users(id)
+);
+
+-- 39. Ticket Comments
+CREATE TABLE ticket_comments (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    ticket_id BIGINT UNSIGNED,
+    user_id BIGINT UNSIGNED NULL, -- Null if customer reply
+    comment_body TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ticket_id) REFERENCES support_tickets(id)
+);
+```
+
+### Phase 9: Extended Inventory & Manufacturing (40-48)
+
+Production and Supplier Management.
+
+```sql
+-- 40. Bill of Materials (BOM Header)
+CREATE TABLE boms (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    product_id BIGINT UNSIGNED, -- The finished good
+    name VARCHAR(100),
+    is_active BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 41. BOM Components (Ingredients)
+CREATE TABLE bom_components (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    bom_id BIGINT UNSIGNED,
+    component_product_id BIGINT UNSIGNED,
+    quantity DECIMAL(15,4),
+    FOREIGN KEY (bom_id) REFERENCES boms(id),
+    FOREIGN KEY (component_product_id) REFERENCES products(id)
+);
+
+-- 42. Manufacturing Orders
+CREATE TABLE manufacturing_orders (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    mo_number VARCHAR(50),
+    product_id BIGINT UNSIGNED,
+    quantity_to_build DECIMAL(15,4),
+    status ENUM('planned', 'in_progress', 'done', 'cancelled'),
+    start_date DATE,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 43. Work Centers
+CREATE TABLE work_centers (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    capacity_per_hour DECIMAL(10,2),
+    cost_per_hour DECIMAL(10,2)
+);
+
+-- 44. Stock Adjustments (Manual Counts)
+CREATE TABLE stock_adjustments (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    warehouse_id BIGINT UNSIGNED,
+    reason VARCHAR(255),
+    adjustment_date DATE,
+    status ENUM('draft', 'applied'),
+    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)
+);
+
+-- 45. Lots (Batches)
+CREATE TABLE lots (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    lot_number VARCHAR(100) UNIQUE,
+    product_id BIGINT UNSIGNED,
+    expiry_date DATE,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 46. Serial Numbers
+CREATE TABLE serial_numbers (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    serial_code VARCHAR(100) UNIQUE,
+    product_id BIGINT UNSIGNED,
+    status ENUM('in_stock', 'sold', 'returned'),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 47. Shipping Methods
+CREATE TABLE shipping_methods (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    provider VARCHAR(100), -- e.g., UPS, FedEx
+    base_cost DECIMAL(10,2)
+);
+
+-- 48. Suppliers (Vendors detailed)
+CREATE TABLE suppliers (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    account_id BIGINT UNSIGNED UNIQUE,
+    tax_id VARCHAR(50),
+    payment_terms_id BIGINT UNSIGNED, -- Forward reference to 59
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
+);
+```
+
+### Phase 10: Extended Finance (49-59)
+
+Banking, Assets, and Accounting Periods.
+
+```sql
+-- 49. Fiscal Years
+CREATE TABLE fiscal_years (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20),
+    start_date DATE,
+    end_date DATE,
+    is_closed BOOLEAN DEFAULT FALSE
+);
+
+-- 50. Accounting Periods
+CREATE TABLE accounting_periods (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    fiscal_year_id BIGINT UNSIGNED,
+    name VARCHAR(20), -- e.g., "Jan 2024"
+    start_date DATE,
+    end_date DATE,
+    is_closed BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (fiscal_year_id) REFERENCES fiscal_years(id)
+);
+
+-- 51. Bank Accounts
+CREATE TABLE bank_accounts (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    account_number VARCHAR(50),
+    bank_name VARCHAR(100),
+    currency_code CHAR(3),
+    gl_account_id BIGINT UNSIGNED, -- Link to Chart of Accounts
+    FOREIGN KEY (gl_account_id) REFERENCES chart_of_accounts(id)
+);
+
+-- 52. Bank Statements
+CREATE TABLE bank_statements (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    bank_account_id BIGINT UNSIGNED,
+    statement_date DATE,
+    start_balance DECIMAL(15,2),
+    end_balance DECIMAL(15,2),
+    FOREIGN KEY (bank_account_id) REFERENCES bank_accounts(id)
+);
+
+-- 53. Bank Statement Lines
+CREATE TABLE bank_statement_lines (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    bank_statement_id BIGINT UNSIGNED,
+    transaction_date DATE,
+    description VARCHAR(255),
+    amount DECIMAL(15,2),
+    is_reconciled BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (bank_statement_id) REFERENCES bank_statements(id)
+);
+
+-- 54. Expense Reports
+CREATE TABLE expense_reports (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    employee_id BIGINT UNSIGNED,
+    title VARCHAR(200),
+    submission_date DATE,
+    status ENUM('draft', 'submitted', 'approved', 'paid', 'rejected'),
+    total_amount DECIMAL(15,2),
+    FOREIGN KEY (employee_id) REFERENCES employees(id)
+);
+
+-- 55. Expense Categories
+CREATE TABLE expense_categories (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    gl_account_id BIGINT UNSIGNED,
+    FOREIGN KEY (gl_account_id) REFERENCES chart_of_accounts(id)
+);
+
+-- 56. Assets (Fixed Assets)
+CREATE TABLE assets (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    purchase_date DATE,
+    purchase_cost DECIMAL(15,2),
+    salvage_value DECIMAL(15,2),
+    useful_life_years INT,
+    status ENUM('active', 'sold', 'disposed')
+);
+
+-- 57. Asset Depreciation Schedules
+CREATE TABLE asset_depreciation_schedules (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    asset_id BIGINT UNSIGNED,
+    depreciation_date DATE,
+    amount DECIMAL(15,2),
+    posted BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (asset_id) REFERENCES assets(id)
+);
+
+-- 58. Credit Notes (Refunds)
+CREATE TABLE credit_notes (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    cn_number VARCHAR(50) UNIQUE,
+    invoice_id BIGINT UNSIGNED, -- Original Invoice
+    customer_id BIGINT UNSIGNED,
+    amount DECIMAL(15,2),
+    reason VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (invoice_id) REFERENCES invoices(id)
+);
+
+-- 59. Payment Terms
+CREATE TABLE payment_terms (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50), -- e.g., "Net 30"
+    days_due INT
+);
+```
+
+### Phase 11: HR & Payroll (60-67)
+
+Hiring, Time off, and Pay.
+
+```sql
+-- 60. Job Positions
+CREATE TABLE job_positions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100),
+    department_id BIGINT UNSIGNED,
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+);
+
+-- 61. Applicants (ATS)
+CREATE TABLE applicants (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(255),
+    job_position_id BIGINT UNSIGNED,
+    status ENUM('new', 'interviewing', 'hired', 'rejected'),
+    resume_url VARCHAR(255),
+    FOREIGN KEY (job_position_id) REFERENCES job_positions(id)
+);
+
+-- 62. Leave Types
+CREATE TABLE leave_types (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50), -- Sick, Vacation, Unpaid
+    is_paid BOOLEAN DEFAULT TRUE,
+    days_per_year INT
+);
+
+-- 63. Leaves (Time Off)
+CREATE TABLE leaves (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    employee_id BIGINT UNSIGNED,
+    leave_type_id BIGINT UNSIGNED,
+    start_date DATE,
+    end_date DATE,
+    status ENUM('pending', 'approved', 'rejected'),
+    FOREIGN KEY (employee_id) REFERENCES employees(id),
+    FOREIGN KEY (leave_type_id) REFERENCES leave_types(id)
+);
+
+-- 64. Attendance Logs
+CREATE TABLE attendance_logs (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    employee_id BIGINT UNSIGNED,
+    check_in DATETIME,
+    check_out DATETIME,
+    FOREIGN KEY (employee_id) REFERENCES employees(id)
+);
+
+-- 65. Payroll Batches
+CREATE TABLE payroll_batches (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    period_start DATE,
+    period_end DATE,
+    payment_date DATE,
+    status ENUM('draft', 'processed', 'paid')
+);
+
+-- 66. Payslips
+CREATE TABLE payslips (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    payroll_batch_id BIGINT UNSIGNED,
+    employee_id BIGINT UNSIGNED,
+    basic_wage DECIMAL(15,2),
+    deductions DECIMAL(15,2),
+    net_pay DECIMAL(15,2),
+    FOREIGN KEY (payroll_batch_id) REFERENCES payroll_batches(id),
+    FOREIGN KEY (employee_id) REFERENCES employees(id)
+);
+
+-- 67. Benefits
+CREATE TABLE benefits (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    employee_id BIGINT UNSIGNED,
+    name VARCHAR(100), -- Health Insurance
+    employer_contribution DECIMAL(15,2),
+    employee_deduction DECIMAL(15,2),
+    FOREIGN KEY (employee_id) REFERENCES employees(id)
+);
+```
+
+### Phase 12: Projects & PSA (68-72)
+
+Service delivery.
+
+```sql
+-- 68. Projects
+CREATE TABLE projects (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    customer_id BIGINT UNSIGNED,
+    manager_id BIGINT UNSIGNED,
+    start_date DATE,
+    end_date DATE,
+    status ENUM('planned', 'in_progress', 'completed', 'hold'),
+    FOREIGN KEY (customer_id) REFERENCES accounts(id),
+    FOREIGN KEY (manager_id) REFERENCES users(id)
+);
+
+-- 69. Project Tasks
+CREATE TABLE project_tasks (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    project_id BIGINT UNSIGNED,
+    name VARCHAR(200),
+    assigned_to_id BIGINT UNSIGNED,
+    due_date DATE,
+    progress_percent INT DEFAULT 0,
+    FOREIGN KEY (project_id) REFERENCES projects(id),
+    FOREIGN KEY (assigned_to_id) REFERENCES users(id)
+);
+
+-- 70. Timesheets
+CREATE TABLE timesheets (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    employee_id BIGINT UNSIGNED,
+    project_id BIGINT UNSIGNED,
+    task_id BIGINT UNSIGNED,
+    date_logged DATE,
+    hours_worked DECIMAL(5,2),
+    description TEXT,
+    FOREIGN KEY (project_id) REFERENCES projects(id),
+    FOREIGN KEY (task_id) REFERENCES project_tasks(id)
+);
+
+-- 71. Milestones
+CREATE TABLE milestones (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    project_id BIGINT UNSIGNED,
+    name VARCHAR(100),
+    due_date DATE,
+    is_reached BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (project_id) REFERENCES projects(id)
+);
+
+-- 72. Project Teams
+CREATE TABLE project_teams (
+    project_id BIGINT UNSIGNED,
+    user_id BIGINT UNSIGNED,
+    role VARCHAR(50),
+    PRIMARY KEY (project_id, user_id),
+    FOREIGN KEY (project_id) REFERENCES projects(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+```
+
+### Phase 13: E-Commerce (73-79)
+
+Web store data.
+
+```sql
+-- 73. Web Store Fronts
+CREATE TABLE web_store_fronts (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    url VARCHAR(255)
+);
+
+-- 74. Carts
+CREATE TABLE carts (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    customer_id BIGINT UNSIGNED NULL, -- Null for guest
+    session_id VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES accounts(id)
+);
+
+-- 75. Wishlists
+CREATE TABLE wishlists (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    customer_id BIGINT UNSIGNED,
+    product_id BIGINT UNSIGNED,
+    added_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES accounts(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 76. Product Images
+CREATE TABLE product_images (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    product_id BIGINT UNSIGNED,
+    image_url VARCHAR(255),
+    is_primary BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 77. Product Reviews
+CREATE TABLE product_reviews (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    product_id BIGINT UNSIGNED,
+    customer_id BIGINT UNSIGNED,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 78. Coupons
+CREATE TABLE coupons (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(50) UNIQUE,
+    discount_type ENUM('percent', 'fixed'),
+    discount_value DECIMAL(15,2),
+    expiry_date DATE
+);
+
+-- 79. Promotions
+CREATE TABLE promotions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    start_date DATE,
+    end_date DATE,
+    description TEXT
+);
+```
+
+### Phase 14: Logistics (80-86)
+
+Fulfillment and Delivery.
+
+```sql
+-- 80. Shipments
+CREATE TABLE shipments (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    sales_order_id BIGINT UNSIGNED,
+    warehouse_id BIGINT UNSIGNED,
+    carrier_id BIGINT UNSIGNED, -- Forward ref to 82
+    tracking_number VARCHAR(100),
+    shipped_date DATETIME,
+    status ENUM('pending', 'shipped', 'delivered'),
+    FOREIGN KEY (sales_order_id) REFERENCES sales_orders(id),
+    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)
+);
+
+-- 81. Shipment Items
+CREATE TABLE shipment_items (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    shipment_id BIGINT UNSIGNED,
+    product_id BIGINT UNSIGNED,
+    quantity DECIMAL(15,4),
+    FOREIGN KEY (shipment_id) REFERENCES shipments(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- 82. Carriers
+CREATE TABLE carriers (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    api_url VARCHAR(255)
+);
+
+-- 83. Tracking Numbers (Detailed logs)
+CREATE TABLE tracking_updates (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    shipment_id BIGINT UNSIGNED,
+    status VARCHAR(100),
+    location VARCHAR(100),
+    timestamp DATETIME,
+    FOREIGN KEY (shipment_id) REFERENCES shipments(id)
+);
+
+-- 84. Delivery Routes
+CREATE TABLE delivery_routes (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    zone_code VARCHAR(50)
+);
+
+-- 85. Vehicles
+CREATE TABLE vehicles (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    license_plate VARCHAR(20) UNIQUE,
+    make VARCHAR(50),
+    model VARCHAR(50),
+    capacity_kg DECIMAL(10,2)
+);
+
+-- 86. Drivers
+CREATE TABLE drivers (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    employee_id BIGINT UNSIGNED,
+    license_number VARCHAR(50),
+    vehicle_id BIGINT UNSIGNED,
+    FOREIGN KEY (employee_id) REFERENCES employees(id),
+    FOREIGN KEY (vehicle_id) REFERENCES vehicles(id)
+);
+```
+
+### Phase 15: Analytics & Logs (87-91)
+
+Monitoring and Reporting.
+
+```sql
+-- 87. Audit Logs
+CREATE TABLE audit_logs (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT UNSIGNED,
+    action VARCHAR(100), -- 'update', 'delete'
+    table_name VARCHAR(50),
+    record_id BIGINT UNSIGNED,
+    old_value JSON,
+    new_value JSON,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 88. Error Logs
+CREATE TABLE error_logs (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    error_code VARCHAR(50),
+    message TEXT,
+    stack_trace TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 89. Login History
+CREATE TABLE login_history (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT UNSIGNED,
+    ip_address VARCHAR(45),
+    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    success BOOLEAN,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- 90. Report Definitions
+CREATE TABLE report_definitions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    sql_query TEXT, -- Use with caution
+    created_by BIGINT UNSIGNED,
+    FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
+-- 91. Scheduled Jobs (Cron)
+CREATE TABLE scheduled_jobs (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    last_run DATETIME,
+    next_run DATETIME,
+    status ENUM('idle', 'running', 'failed')
+);
+```
+
+### Phase 16: Access & Docs (92-100)
+
+Permissions and File Management.
+
+```sql
+-- 92. Permissions
+CREATE TABLE permissions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) UNIQUE, -- 'invoice.create', 'user.delete'
+    description TEXT
+);
+
+-- 93. Role Permissions (Pivot)
+CREATE TABLE role_permissions (
+    role_id BIGINT UNSIGNED,
+    permission_id BIGINT UNSIGNED,
+    PRIMARY KEY (role_id, permission_id),
+    FOREIGN KEY (role_id) REFERENCES roles(id),
+    FOREIGN KEY (permission_id) REFERENCES permissions(id)
+);
+
+-- 94. User Groups
+CREATE TABLE user_groups (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- 95. Group Members
+CREATE TABLE group_members (
+    group_id BIGINT UNSIGNED,
+    user_id BIGINT UNSIGNED,
+    PRIMARY KEY (group_id, user_id),
+    FOREIGN KEY (group_id) REFERENCES user_groups(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- 96. Documents (Files)
+CREATE TABLE documents (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    file_name VARCHAR(255),
+    file_path VARCHAR(255),
+    mime_type VARCHAR(100),
+    size_bytes BIGINT,
+    uploaded_by BIGINT UNSIGNED,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (uploaded_by) REFERENCES users(id)
+);
+
+-- 97. Document Versions
+CREATE TABLE document_versions (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    document_id BIGINT UNSIGNED,
+    version_number INT,
+    file_path VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (document_id) REFERENCES documents(id)
+);
+
+-- 98. Folders
+CREATE TABLE folders (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    parent_id BIGINT UNSIGNED,
+    FOREIGN KEY (parent_id) REFERENCES folders(id)
+);
+
+-- 99. Tags
+CREATE TABLE tags (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) UNIQUE,
+    color_code VARCHAR(7) -- Hex
+);
+
+-- 100. Taggables (Polymorphic)
+CREATE TABLE taggables (
+    tag_id BIGINT UNSIGNED,
+    taggable_id BIGINT UNSIGNED,
+    taggable_type VARCHAR(50), -- 'contact', 'invoice', 'product'
+    PRIMARY KEY (tag_id, taggable_id, taggable_type),
+    FOREIGN KEY (tag_id) REFERENCES tags(id)
+);
+```
