@@ -2,7 +2,7 @@
 
 
 
-# Project Resource Plan & Feasibility Analysis: Enterprise CRM/ERP (v3, [v2](https://github.com/landawn/mi-erp/blob/main/docs/README_v2.md), [v1](https://github.com/landawn/mi-erp/blob/main/docs/README_v1.md))
+# Project Resource Plan & Feasibility Analysis: Enterprise CRM/ERP (v2, [v1](https://github.com/landawn/mi-erp/blob/main/docs/README_v1.md))
 
 ## Project Overview
 * **Objective:** Develop a world-class CRM/ERP system.
