@@ -86,8 +86,8 @@ $$
 
 ### Nonetheless, I believe it is still achievable under certain exceptional conditions:
 
-* **Highly mature frameworks** (e.g., *JDK 25+*, *Spring 7+*).
-* **Extremely productive libraries and tooling** (e.g., *log4j2*, *Jackson8*, *Guava*, *abacus-common*, *abacus-jdbc*).
+* **Highly mature frameworks** (e.g., *JDK 25+*, *Spring 7+*, *log4j2*, *Jackson*, *Guava*).
+* **Extremely productive libraries and tooling** (e.g., *abacus-common*, *abacus-jdbc*).
 * **Small, highly efficient teams with rapid communication** (e.g., *80% coding / 20% coordination*).
 * **Very strong senior/10x engineers**.
 * *AI-assisted development and automation*.
@@ -181,7 +181,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 ---
 
 
-### Plan B: based on 2 backend + 2 frontend + 1 ios App + 1 UX developers in 3 months to develop a demo ERP system
+### Plan B: based on 3 backend + 2 frontend + 1 UX developers in 3 months to develop a demo ERP system
 
 * Production LOC (target): 162,000
 * Test LOC (target): 0 (*No test code*)
