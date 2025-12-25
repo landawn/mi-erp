@@ -16,8 +16,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@Table(name = "employee_address_map")
-public class EmployeeAddressMap {
+@Table(name = "employee_address")
+public class EmployeeAddress {
 
     @Id
     @ReadOnly

@@ -1,6 +1,6 @@
 -- ====== employee
 
-DROP TABLE IF EXISTS employee_address_map;
+DROP TABLE IF EXISTS employee_address;
 DROP TABLE IF EXISTS employee;
 
 CREATE TABLE employee
@@ -28,7 +28,7 @@ CREATE TABLE employee
 -- ====== address
 
 DROP TABLE IF EXISTS address;
-DROP TABLE IF EXISTS employee_address_map;
+DROP TABLE IF EXISTS employee_address;
 
 CREATE TABLE address
 (
@@ -58,11 +58,11 @@ CREATE TABLE address
   DEFAULT CHARSET = UTF8MB4;
 
 
--- ====== employee_address_map
+-- ====== employee_address
 
-DROP TABLE IF EXISTS employee_address_map;
+DROP TABLE IF EXISTS employee_address;
 
-CREATE TABLE employee_address_map
+CREATE TABLE employee_address
 (
     id                INT       NOT NULL AUTO_INCREMENT,
     employee_id       INT       NOT NULL,

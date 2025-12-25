@@ -52,7 +52,7 @@ public class Employee {
     @Column(name = "created_time")
     private java.sql.Timestamp createdTime;
 
-    @JoinedBy({ "id=EmployeeAddressMap.employeeId", "EmployeeAddressMap.addressId=Address.id" })
+    @JoinedBy({ "id=EmployeeAddress.employeeId", "EmployeeAddress.addressId=Address.id" })
     private List<Address> addresses;
 
 }

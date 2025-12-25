@@ -8,12 +8,12 @@ import com.landawn.abacus.jdbc.JdbcUtil;
 import com.landawn.abacus.util.N;
 
 import net.mi.erp.dao.AddressDAO;
-import net.mi.erp.dao.EmployeeAddressMapDAO;
+import net.mi.erp.dao.EmployeeAddressDAO;
 import net.mi.erp.dao.EmployeeDAO;
 import net.mi.erp.dao.ProjectDAO;
 import net.mi.erp.entity.Address;
 import net.mi.erp.entity.Employee;
-import net.mi.erp.entity.EmployeeAddressMap;
+import net.mi.erp.entity.EmployeeAddress;
 import net.mi.erp.entity.Project;
 
 public class DAOTest {
@@ -24,7 +24,7 @@ public class DAOTest {
     static final ProjectDAO projectDAO = JdbcUtil.createDao(ProjectDAO.class, dataSource);
     static final EmployeeDAO employeeDAO = JdbcUtil.createDao(EmployeeDAO.class, dataSource);
     static final AddressDAO addressDAO = JdbcUtil.createDao(AddressDAO.class, dataSource);
-    static final EmployeeAddressMapDAO employeeAddressMapDAO = JdbcUtil.createDao(EmployeeAddressMapDAO.class, dataSource);
+    static final EmployeeAddressDAO employeeAddressDAO = JdbcUtil.createDao(EmployeeAddressDAO.class, dataSource);
 
     @Test
     public void test_dao_01() {
@@ -57,9 +57,9 @@ public class DAOTest {
         N.println(employeeFromDB);
         N.println(addressFromDB);
 
-        EmployeeAddressMap employeeAddressMap = EmployeeAddressMap.builder().employeeId(employeeId).addressId(addressId).build();
+        EmployeeAddress employeeAddress = EmployeeAddress.builder().employeeId(employeeId).addressId(addressId).build();
 
-        employeeAddressMapDAO.insert(employeeAddressMap);
+        employeeAddressDAO.insert(employeeAddress);
 
         employeeDAO.loadJoinEntities(employeeFromDB, Address.class);
 

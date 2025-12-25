@@ -37,11 +37,11 @@ class CodeGenerationUtil {
 
     static void generateEntityClass() {
 
-        List<String> tableNames = List.of("employee", "address", "employee_address_map", "project");
+        List<String> tableNames = List.of("employee", "address", "employee_address", "project");
 
         final Map<String, String> additionLinesMap = new HashMap<>();
         additionLinesMap.put("employee", """
-                    @JoinedBy({ "id=EmployeeAddressMap.employeeId", "EmployeeAddressMap.addressId=Address.id" })
+                    @JoinedBy({ "id=EmployeeAddress.employeeId", "EmployeeAddress.addressId=Address.id" })
                     private List<Address> addresses;
                 """);
 
