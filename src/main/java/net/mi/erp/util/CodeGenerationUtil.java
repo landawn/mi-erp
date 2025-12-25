@@ -67,6 +67,7 @@ class CodeGenerationUtil {
                 // .customizedFieldDbTypes(N.asList(Tuple.of("recordStatus", "enumerated = EnumBy.ORDINAL")))
                 // .classNamesToImport(N.asList(ClassUtil.getCanonicalClassName(EnumBy.class), ClassUtil.getCanonicalClassName(RecordStatus.class)))
                 .generateBuilder(true)
+                .chainAccessor(false)
                 // .generateFieldNameTable(true)
                 .build();
 

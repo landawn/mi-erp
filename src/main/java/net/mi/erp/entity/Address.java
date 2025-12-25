@@ -9,13 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 @Table(name = "address")
 public class Address {
 
@@ -48,11 +46,11 @@ public class Address {
     @Column(name = "type")
     private int type;
 
-    @Column(name = "is_primary")
-    private boolean isPrimary;
-
     @Column(name = "comments")
     private String comments;
+
+    @Column(name = "is_primary")
+    private boolean isPrimary;
 
     @ReadOnly
     @Column(name = "last_updated_time")

@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
+@Accessors(chain = false)
 public class AddressDTO {
 
     private int id;
@@ -31,6 +31,8 @@ public class AddressDTO {
     private int type;
 
     private boolean isPrimary;
+
+    private String comments;
 
     private java.sql.Timestamp lastUpdatedTime;
 

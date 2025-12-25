@@ -45,8 +45,8 @@ CREATE TABLE address
     country_code      CHAR(3)      NOT NULL COMMENT 'ISO-3166-1 alpha-2',
 
     type              TINYINT      NOT NULL DEFAULT 0 COMMENT '0=default, 1=home, 2=business, 4=office',
-    is_primary        BOOLEAN      NOT NULL DEFAULT FALSE,
     comments          VARCHAR(256)          DEFAULT NULL,
+    is_primary        BOOLEAN      NOT NULL DEFAULT FALSE,
 
     -- common columns for all tables
     last_updated_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

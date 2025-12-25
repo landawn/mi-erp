@@ -27,6 +27,9 @@ public abstract class x {
     public static final String code = "code";
 
     /** field name in entities: [Address] */
+    public static final String comments = "comments";
+
+    /** field name in entities: [Address] */
     public static final String countryCode = "countryCode";
 
     /** field name in entities: [Address, Employee, EmployeeAddress, Project] */
