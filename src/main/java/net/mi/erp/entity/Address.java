@@ -28,8 +28,8 @@ public class Address {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "address_line1")
-    private String addressLine1;
+    @Column(name = "address_line")
+    private String addressLine;
 
     @Column(name = "address_line2")
     private String addressLine2;

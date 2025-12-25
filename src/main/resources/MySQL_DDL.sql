@@ -1,7 +1,7 @@
 -- ====== employee
 
-DROP TABLE IF EXISTS employee;
 DROP TABLE IF EXISTS employee_address_map;
+DROP TABLE IF EXISTS employee;
 
 CREATE TABLE employee
 (
@@ -35,7 +35,7 @@ CREATE TABLE address
 (
     id                INT UNSIGNED NOT NULL AUTO_INCREMENT,
 
-    address_line1     VARCHAR(255) NOT NULL,
+    address_line     VARCHAR(255) NOT NULL,
     address_line2     VARCHAR(255)          DEFAULT NULL,
 
     unit_number       VARCHAR(32)           DEFAULT NULL,
