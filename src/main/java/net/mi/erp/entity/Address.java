@@ -51,6 +51,9 @@ public class Address {
     @Column(name = "is_primary")
     private boolean isPrimary;
 
+    @Column(name = "comments")
+    private String comments;
+
     @ReadOnly
     @Column(name = "last_updated_time")
     private java.sql.Timestamp lastUpdatedTime;
