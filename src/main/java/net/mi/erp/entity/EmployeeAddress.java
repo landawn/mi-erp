@@ -28,6 +28,9 @@ public class EmployeeAddress {
     @Column(name = "address_id")
     private int addressId;
 
+    @Column(name = "status")
+    private int status;
+
     @ReadOnly
     @Column(name = "last_updated_time")
     private java.sql.Timestamp lastUpdatedTime;

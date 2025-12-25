@@ -41,6 +41,9 @@ public class Project {
     @Column(name = "end_date")
     private java.time.LocalDateTime endDate;
 
+    @Column(name = "status")
+    private int status;
+
     @ReadOnly
     @Column(name = "last_updated_time")
     private java.sql.Timestamp lastUpdatedTime;

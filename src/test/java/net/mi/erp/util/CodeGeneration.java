@@ -13,6 +13,7 @@
  */
 package net.mi.erp.util;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,15 +35,19 @@ class CodeGeneration {
     static final String url = "jdbc:mysql://localhost:3306/mi_erp";
     static final DataSource dataSource = JdbcUtil.createHikariDataSource(url, "root", "admin");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         generateEntityClass();
 
         generateFieldNameClass();
     }
 
-    static void generateEntityClass() {
+    static void generateEntityClass() throws SQLException {
 
-        List<String> tableNames = List.of("employee", "address", "employee_address", "project");
+        // List<String> tableNames = List.of("employee", "address", "employee_address", "project");
+
+        List<String> tableNames = JdbcUtil
+                .prepareQuery(dataSource, "SELECT table_name FROM information_schema.tables  where table_schema = 'mi_erp' ORDER BY table_name")
+                .list(String.class);
 
         final Map<String, String> additionLinesMap = new HashMap<>();
         additionLinesMap.put("employee", """

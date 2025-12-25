@@ -42,6 +42,9 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "status")
+    private int status;
+
     @ReadOnly
     @Column(name = "last_updated_time")
     private java.sql.Timestamp lastUpdatedTime;

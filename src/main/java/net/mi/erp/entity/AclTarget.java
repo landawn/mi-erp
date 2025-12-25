@@ -14,43 +14,35 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "address")
-public class Address {
+@Table(name = "acl_target")
+public class AclTarget {
 
     @Id
     @ReadOnly
     @Column(name = "id")
     private int id;
 
-    @Column(name = "address_line")
-    private String addressLine;
+    @ReadOnly
+    @Column(name = "uuid")
+    private String uuid;
 
-    @Column(name = "address_line2")
-    private String addressLine2;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "unit_number")
-    private String unitNumber;
+    @Column(name = "category")
+    private String category;
 
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "state")
-    private String state;
-
-    @Column(name = "postal_code")
-    private String postalCode;
-
-    @Column(name = "country_code")
-    private String countryCode;
+    @Column(name = "sub_category")
+    private String subCategory;
 
     @Column(name = "type")
-    private int type;
+    private String type;
 
-    @Column(name = "comments")
-    private String comments;
+    @Column(name = "sub_type")
+    private String subType;
 
-    @Column(name = "is_primary")
-    private boolean isPrimary;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "status")
     private int status;
