@@ -7,6 +7,6 @@ import com.landawn.abacus.query.SQLBuilder;
 import net.mi.erp.entity.Employee;
 
 public interface EmployeeDAO
-        extends UncheckedCrudDao<Employee, Long, SQLBuilder.PSC, EmployeeDAO>, UncheckedJoinEntityHelper<Employee, SQLBuilder.PSC, EmployeeDAO> {
+        extends UncheckedCrudDao<Employee, Integer, SQLBuilder.PSC, EmployeeDAO>, UncheckedJoinEntityHelper<Employee, SQLBuilder.PSC, EmployeeDAO> {
 
 }

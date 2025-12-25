@@ -19,15 +19,10 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.landawn.abacus.annotation.Type.EnumBy;
 import com.landawn.abacus.jdbc.JdbcCodeGenerationUtil;
 import com.landawn.abacus.jdbc.JdbcCodeGenerationUtil.EntityCodeConfig;
 import com.landawn.abacus.jdbc.JdbcUtil;
-import com.landawn.abacus.util.ClassUtil;
 import com.landawn.abacus.util.N;
-import com.landawn.abacus.util.Tuple;
-
-import net.mi.erp.model.RecordStatus;
 
 class CodeGenerationUtil {
 
@@ -55,8 +50,8 @@ class CodeGenerationUtil {
                 .idField("id")
                 .readOnlyFields(N.asSet("id", "uuid", "createdTime", "lastUpdatedTime"))
                 .fieldTypeConverter((_, _, columnName, columnClassName) -> columnName.equalsIgnoreCase("record_status") ? "RecordStatus" : columnClassName)
-                .customizedFieldDbTypes(N.asList(Tuple.of("recordStatus", "enumerated = EnumBy.ORDINAL")))
-                .classNamesToImport(N.asList(ClassUtil.getCanonicalClassName(EnumBy.class), ClassUtil.getCanonicalClassName(RecordStatus.class)))
+                // .customizedFieldDbTypes(N.asList(Tuple.of("recordStatus", "enumerated = EnumBy.ORDINAL")))
+                // .classNamesToImport(N.asList(ClassUtil.getCanonicalClassName(EnumBy.class), ClassUtil.getCanonicalClassName(RecordStatus.class)))
                 .generateBuilder(true)
                 // .generateFieldNameTable(true)
                 .build();

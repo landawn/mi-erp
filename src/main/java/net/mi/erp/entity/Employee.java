@@ -6,15 +6,12 @@ import com.landawn.abacus.annotation.Id;
 import com.landawn.abacus.annotation.JoinedBy;
 import com.landawn.abacus.annotation.ReadOnly;
 import com.landawn.abacus.annotation.Table;
-import com.landawn.abacus.annotation.Type;
-import com.landawn.abacus.annotation.Type.EnumBy;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import net.mi.erp.model.RecordStatus;
 
 @Builder
 @Data
@@ -27,14 +24,14 @@ public class Employee {
     @Id
     @ReadOnly
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @ReadOnly
     @Column(name = "uuid")
     private String uuid;
 
     @Column(name = "employee_no")
-    private long employeeNo;
+    private int employeeNo;
 
     @Column(name = "first_name")
     private String firstName;
@@ -44,10 +41,6 @@ public class Employee {
 
     @Column(name = "last_name")
     private String lastName;
-
-    @Column(name = "record_status")
-    @Type(enumerated = EnumBy.ORDINAL)
-    private RecordStatus recordStatus;
 
     @ReadOnly
     @Column(name = "last_updated_time")

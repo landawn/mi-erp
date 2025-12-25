@@ -5,19 +5,18 @@ DROP TABLE IF EXISTS employee;
 
 CREATE TABLE employee
 (
-    id                INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
+    id                INT         NOT NULL AUTO_INCREMENT,
+    uuid              VARCHAR(64) NOT NULL DEFAULT (UUID()),
 
-    employee_no       INT UNSIGNED NOT NULL,
+    employee_no       INT         NOT NULL,
 
-    first_name        VARCHAR(64)  NOT NULL,
-    middle_name       VARCHAR(32)           DEFAULT NULL,
-    last_name         VARCHAR(64)  NOT NULL,
+    first_name        VARCHAR(64) NOT NULL,
+    middle_name       VARCHAR(32)          DEFAULT NULL,
+    last_name         VARCHAR(64) NOT NULL,
 
     -- common columns for all tables
-    record_status     TINYINT      NOT NULL DEFAULT 0,
-    last_updated_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    created_time      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_updated_time TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_time      TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id),
     UNIQUE KEY uk_uuid (uuid),
@@ -33,9 +32,9 @@ DROP TABLE IF EXISTS employee_address_map;
 
 CREATE TABLE address
 (
-    id                INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id                INT          NOT NULL AUTO_INCREMENT,
 
-    address_line     VARCHAR(255) NOT NULL,
+    address_line      VARCHAR(255) NOT NULL,
     address_line2     VARCHAR(255)          DEFAULT NULL,
 
     unit_number       VARCHAR(32)           DEFAULT NULL,
@@ -49,7 +48,6 @@ CREATE TABLE address
     is_primary        BOOLEAN      NOT NULL DEFAULT TRUE,
 
     -- common columns for all tables
-    record_status     TINYINT      NOT NULL DEFAULT 0,
     last_updated_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_time      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -66,14 +64,13 @@ DROP TABLE IF EXISTS employee_address_map;
 
 CREATE TABLE employee_address_map
 (
-    id                INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    employee_id       INT UNSIGNED NOT NULL,
-    address_id        INT UNSIGNED NOT NULL,
+    id                INT       NOT NULL AUTO_INCREMENT,
+    employee_id       INT       NOT NULL,
+    address_id        INT       NOT NULL,
 
     -- common columns for all tables
-    record_status     TINYINT      NOT NULL DEFAULT 0,
-    last_updated_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    created_time      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_updated_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_time      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id),
     CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES employee (id) ON UPDATE RESTRICT ON DELETE CASCADE,
@@ -87,7 +84,7 @@ DROP TABLE IF EXISTS project;
 
 CREATE TABLE project
 (
-    id                INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id                INT          NOT NULL AUTO_INCREMENT,
     uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
     name              VARCHAR(255) NOT NULL,
@@ -97,7 +94,6 @@ CREATE TABLE project
     end_date          DATETIME              DEFAULT NULL,
 
     -- common columns for all tables
-    record_status     TINYINT      NOT NULL DEFAULT 0,
     last_updated_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_time      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

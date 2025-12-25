@@ -4,10 +4,6 @@ import com.landawn.abacus.annotation.Column;
 import com.landawn.abacus.annotation.Id;
 import com.landawn.abacus.annotation.ReadOnly;
 import com.landawn.abacus.annotation.Table;
-import com.landawn.abacus.annotation.Type;
-
-import com.landawn.abacus.annotation.Type.EnumBy;
-import net.mi.erp.model.RecordStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,17 +22,13 @@ public class EmployeeAddressMap {
     @Id
     @ReadOnly
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "employee_id")
-    private long employeeId;
+    private int employeeId;
 
     @Column(name = "address_id")
-    private long addressId;
-
-    @Column(name = "record_status")
-    @Type(enumerated = EnumBy.ORDINAL)
-    private RecordStatus recordStatus;
+    private int addressId;
 
     @ReadOnly
     @Column(name = "last_updated_time")

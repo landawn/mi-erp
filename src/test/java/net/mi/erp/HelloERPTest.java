@@ -15,12 +15,12 @@ import net.mi.erp.entity.Address;
 import net.mi.erp.entity.Employee;
 import net.mi.erp.entity.EmployeeAddressMap;
 import net.mi.erp.entity.Project;
-import net.mi.erp.model.RecordStatus;
 
 public class HelloERPTest {
 
     static final String url = "jdbc:mysql://localhost:3306/mi_erp";
     static final DataSource dataSource = JdbcUtil.createHikariDataSource(url, "root", "admin");
+
     static final ProjectDAO projectDAO = JdbcUtil.createDao(ProjectDAO.class, dataSource);
     static final EmployeeDAO employeeDAO = JdbcUtil.createDao(EmployeeDAO.class, dataSource);
     static final AddressDAO addressDAO = JdbcUtil.createDao(AddressDAO.class, dataSource);
@@ -28,9 +28,9 @@ public class HelloERPTest {
 
     @Test
     public void test_dao_01() {
-        Project project = Project.builder().name("proj-001").recordStatus(RecordStatus.DEFAULT).build();
+        Project project = Project.builder().name("proj-001").build();
 
-        long id = projectDAO.insert(project);
+        int id = projectDAO.insert(project);
 
         Project projectFromDB = projectDAO.gett(id);
         N.println(projectFromDB);
@@ -45,18 +45,11 @@ public class HelloERPTest {
     public void test_dao_02() {
         // employeeDAO.delete(Filters.alwaysTrue());
 
-        Employee employee = Employee.builder().employeeNo(123).firstName("coderA").lastName("la").recordStatus(RecordStatus.DEFAULT).build();
-        Address address = Address.builder()
-                .addressLine("123 main street")
-                .city("Sunnyvale")
-                .state("ca")
-                .countryCode("us")
-                .postalCode("55213")
-                .recordStatus(RecordStatus.DEFAULT)
-                .build();
+        Employee employee = Employee.builder().employeeNo(123).firstName("coderA").lastName("la").build();
+        Address address = Address.builder().addressLine("123 main street").city("Sunnyvale").state("ca").countryCode("us").postalCode("55213").build();
 
-        long employeeId = employeeDAO.insert(employee);
-        long addressId = addressDAO.insert(address);
+        int employeeId = employeeDAO.insert(employee);
+        int addressId = addressDAO.insert(address);
 
         Employee employeeFromDB = employeeDAO.gett(employeeId);
         Address addressFromDB = addressDAO.gett(addressId);
@@ -64,11 +57,7 @@ public class HelloERPTest {
         N.println(employeeFromDB);
         N.println(addressFromDB);
 
-        EmployeeAddressMap employeeAddressMap = EmployeeAddressMap.builder()
-                .employeeId(employeeId)
-                .addressId(addressId)
-                .recordStatus(RecordStatus.DEFAULT)
-                .build();
+        EmployeeAddressMap employeeAddressMap = EmployeeAddressMap.builder().employeeId(employeeId).addressId(addressId).build();
 
         employeeAddressMapDAO.insert(employeeAddressMap);
 
@@ -81,7 +70,6 @@ public class HelloERPTest {
 
         N.println(employeeDAO.gett(employeeId));
         N.println(addressDAO.gett(addressId));
-
     }
 
 }

@@ -5,6 +5,6 @@ import com.landawn.abacus.query.SQLBuilder;
 
 import net.mi.erp.entity.EmployeeAddressMap;
 
-public interface EmployeeAddressMapDAO extends UncheckedCrudDao<EmployeeAddressMap, Long, SQLBuilder.PSC, EmployeeAddressMapDAO> {
+public interface EmployeeAddressMapDAO extends UncheckedCrudDao<EmployeeAddressMap, Integer, SQLBuilder.PSC, EmployeeAddressMapDAO> {
 
 }

@@ -5,6 +5,6 @@ import com.landawn.abacus.query.SQLBuilder;
 
 import net.mi.erp.entity.Address;
 
-public interface AddressDAO extends UncheckedCrudDao<Address, Long, SQLBuilder.PSC, AddressDAO> {
+public interface AddressDAO extends UncheckedCrudDao<Address, Integer, SQLBuilder.PSC, AddressDAO> {
 
 }
