@@ -1,11 +1,13 @@
 package net.mi.erp.entity;
 import java.util.List;
 
+
 import com.landawn.abacus.annotation.Column;
 import com.landawn.abacus.annotation.Id;
-import com.landawn.abacus.annotation.JoinedBy;
 import com.landawn.abacus.annotation.ReadOnly;
 import com.landawn.abacus.annotation.Table;
+
+import com.landawn.abacus.annotation.JoinedBy;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

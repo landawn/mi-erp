@@ -19,9 +19,11 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import com.landawn.abacus.annotation.JoinedBy;
 import com.landawn.abacus.jdbc.JdbcCodeGenerationUtil;
 import com.landawn.abacus.jdbc.JdbcCodeGenerationUtil.EntityCodeConfig;
 import com.landawn.abacus.jdbc.JdbcUtil;
+import com.landawn.abacus.util.ClassUtil;
 import com.landawn.abacus.util.N;
 
 class CodeGenerationUtil {
@@ -37,12 +39,14 @@ class CodeGenerationUtil {
 
         List<String> tableNames = List.of("employee", "address", "employee_address_map", "project");
 
-        Map<String, String> additionLinesMap = new HashMap<>();
-
+        final Map<String, String> additionLinesMap = new HashMap<>();
         additionLinesMap.put("employee", """
                     @JoinedBy({ "id=EmployeeAddressMap.employeeId", "EmployeeAddressMap.addressId=Address.id" })
                     private List<Address> addresses;
                 """);
+
+        final Map<String, List<String>> classNamesToImportMap = new HashMap<>();
+        classNamesToImportMap.put("employee", List.of(ClassUtil.getCanonicalClassName(JoinedBy.class)));
 
         EntityCodeConfig ecc = EntityCodeConfig.builder()
                 .packageName("net.mi.erp.entity")
@@ -57,8 +61,9 @@ class CodeGenerationUtil {
                 .build();
 
         for (String tableName : tableNames) {
-            String additionLines = additionLinesMap.get(tableName);
-            ecc.setAdditionalFieldsOrLines(additionLines);
+            ecc.setAdditionalFieldsOrLines(additionLinesMap.get(tableName));
+            ecc.setClassNamesToImport(classNamesToImportMap.get(tableName));
+
             JdbcCodeGenerationUtil.generateEntityClass(dataSource, tableName, ecc);
         }
     }
