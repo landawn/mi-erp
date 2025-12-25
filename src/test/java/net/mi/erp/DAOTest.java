@@ -16,7 +16,7 @@ import net.mi.erp.entity.Employee;
 import net.mi.erp.entity.EmployeeAddressMap;
 import net.mi.erp.entity.Project;
 
-public class HelloERPTest {
+public class DAOTest {
 
     static final String url = "jdbc:mysql://localhost:3306/mi_erp";
     static final DataSource dataSource = JdbcUtil.createHikariDataSource(url, "root", "admin");
