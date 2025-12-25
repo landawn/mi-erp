@@ -20,7 +20,6 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.landawn.abacus.annotation.JoinedBy;
 import com.landawn.abacus.jdbc.JdbcCodeGenerationUtil;
 import com.landawn.abacus.jdbc.JdbcCodeGenerationUtil.EntityCodeConfig;
 import com.landawn.abacus.jdbc.JdbcUtil;
@@ -56,7 +55,7 @@ class CodeGeneration {
                 """);
 
         final Map<String, List<String>> classNamesToImportMap = new HashMap<>();
-        classNamesToImportMap.put("employee", List.of(ClassUtil.getCanonicalClassName(JoinedBy.class)));
+        // classNamesToImportMap.put("employee", List.of(ClassUtil.getCanonicalClassName(JoinedBy.class)));
 
         EntityCodeConfig ecc = EntityCodeConfig.builder()
                 .packageName("net.mi.erp.entity")
