@@ -27,6 +27,7 @@ import com.landawn.abacus.util.ClassUtil;
 import com.landawn.abacus.util.CodeGenerationUtil;
 import com.landawn.abacus.util.IOUtil;
 import com.landawn.abacus.util.N;
+import com.landawn.abacus.util.Tuple;
 
 class CodeGeneration {
     static final String LINE_SEPARATOR = IOUtil.LINE_SEPARATOR_UNIX;
@@ -68,9 +69,10 @@ class CodeGeneration {
                 .srcDir("./src/main/java")
                 .idField("id")
                 .readOnlyFields(N.asSet("id", "uuid", "createdTime", "lastUpdatedTime"))
-                .fieldTypeConverter((_, _, columnName, columnClassName) -> columnName.equalsIgnoreCase("record_status") ? "RecordStatus" : columnClassName)
-                // .customizedFieldDbTypes(N.asList(Tuple.of("recordStatus", "enumerated = EnumBy.ORDINAL")))
-                // .classNamesToImport(N.asList(ClassUtil.getCanonicalClassName(EnumBy.class), ClassUtil.getCanonicalClassName(RecordStatus.class)))
+                .fieldTypeConverter(
+                        (_, _, columnName, columnClassName) -> columnName.equalsIgnoreCase("status") ? "net.mi.erp.model.UnifiedStatus" : columnClassName)
+                .customizedFieldDbTypes(N.asList(Tuple.of("status", "enumerated = EnumBy.ORDINAL")))
+                // .classNamesToImport(N.asList(ClassUtil.getCanonicalClassName(UnifiedStatus.class)))
                 .generateBuilder(true)
                 .chainAccessor(false)
                 // .generateFieldNameTable(true)

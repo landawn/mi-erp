@@ -4,6 +4,8 @@ import com.landawn.abacus.annotation.Column;
 import com.landawn.abacus.annotation.Id;
 import com.landawn.abacus.annotation.ReadOnly;
 import com.landawn.abacus.annotation.Table;
+import com.landawn.abacus.annotation.Type;
+import com.landawn.abacus.annotation.Type.EnumBy;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +40,8 @@ public class AclUserGroupTarget {
     private String description;
 
     @Column(name = "status")
-    private int status;
+    @Type(enumerated = EnumBy.ORDINAL)
+    private net.mi.erp.model.UnifiedStatus status;
 
     @ReadOnly
     @Column(name = "last_updated_time")

@@ -15,6 +15,7 @@ import net.mi.erp.entity.Address;
 import net.mi.erp.entity.Employee;
 import net.mi.erp.entity.EmployeeAddress;
 import net.mi.erp.entity.Project;
+import net.mi.erp.model.UnifiedStatus;
 
 public class DAOTest {
 
@@ -28,7 +29,7 @@ public class DAOTest {
 
     @Test
     public void test_dao_01() {
-        Project project = Project.builder().name("proj-001").build();
+        Project project = Project.builder().name("proj-001").status(UnifiedStatus.ACTIVE).build();
 
         int id = projectDAO.insert(project);
 
@@ -45,8 +46,15 @@ public class DAOTest {
     public void test_dao_02() {
         // employeeDAO.delete(Filters.alwaysTrue());
 
-        Employee employee = Employee.builder().employeeNo(123).firstName("coderA").lastName("la").build();
-        Address address = Address.builder().addressLine("123 main street").city("Sunnyvale").state("ca").countryCode("us").postalCode("55213").build();
+        Employee employee = Employee.builder().employeeNo(123).firstName("coderA").lastName("la").status(UnifiedStatus.ACTIVE).build();
+        Address address = Address.builder()
+                .addressLine("123 main street")
+                .city("Sunnyvale")
+                .state("ca")
+                .countryCode("us")
+                .postalCode("55213")
+                .status(UnifiedStatus.ACTIVE)
+                .build();
 
         int employeeId = employeeDAO.insert(employee);
         int addressId = addressDAO.insert(address);
@@ -57,7 +65,7 @@ public class DAOTest {
         N.println(employeeFromDB);
         N.println(addressFromDB);
 
-        EmployeeAddress employeeAddress = EmployeeAddress.builder().employeeId(employeeId).addressId(addressId).build();
+        EmployeeAddress employeeAddress = EmployeeAddress.builder().employeeId(employeeId).addressId(addressId).status(UnifiedStatus.ACTIVE).build();
 
         employeeAddressDAO.insert(employeeAddress);
 
