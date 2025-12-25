@@ -4,7 +4,7 @@ public enum RecordStatus {
 
     DEFAULT(0), DELETED(1), SUSPENDED(2);
 
-    private int code;
+    private final int code;
 
     RecordStatus(int code) {
         this.code = code;
