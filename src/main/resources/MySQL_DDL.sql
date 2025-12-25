@@ -89,6 +89,7 @@ CREATE TABLE project
 
     name              VARCHAR(255) NOT NULL,
     code              VARCHAR(255)          DEFAULT NULL,
+    description       VARCHAR(4096)         DEFAULT NULL,
 
     start_date        DATETIME              DEFAULT NULL,
     end_date          DATETIME              DEFAULT NULL,

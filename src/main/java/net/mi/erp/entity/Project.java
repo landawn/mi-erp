@@ -34,6 +34,9 @@ public class Project {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "start_date")
     private java.time.LocalDateTime startDate;
 

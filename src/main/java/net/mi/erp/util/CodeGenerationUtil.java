@@ -13,26 +13,36 @@
  */
 package net.mi.erp.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.landawn.abacus.annotation.JoinedBy;
 import com.landawn.abacus.jdbc.JdbcCodeGenerationUtil;
 import com.landawn.abacus.jdbc.JdbcCodeGenerationUtil.EntityCodeConfig;
 import com.landawn.abacus.jdbc.JdbcUtil;
+import com.landawn.abacus.util.Beans;
 import com.landawn.abacus.util.ClassUtil;
+import com.landawn.abacus.util.IOUtil;
 import com.landawn.abacus.util.N;
+import com.landawn.abacus.util.stream.Stream;
 
 class CodeGenerationUtil {
+    static final String LINE_SEPARATOR = IOUtil.LINE_SEPARATOR_UNIX;
 
     static final String url = "jdbc:mysql://localhost:3306/mi_erp";
     static final DataSource dataSource = JdbcUtil.createHikariDataSource(url, "root", "admin");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         generateEntityClass();
+
+        generateFieldNameClass();
     }
 
     static void generateEntityClass() {
@@ -66,6 +76,47 @@ class CodeGenerationUtil {
 
             JdbcCodeGenerationUtil.generateEntityClass(dataSource, tableName, ecc);
         }
+    }
+
+    static void generateFieldNameClass() throws IOException {
+        List<Class<?>> entityClasses = ClassUtil.getClassesByPackage("net.mi.erp.entity", false, false);
+
+        String header = """
+                package net.mi.erp.util;
+
+                /**
+                 * String constant class for entity field name
+                 */
+                public abstract class x {
+                    private x() {
+                        // utility class.
+                    }
+
+                """;
+
+        String tail = """
+
+                    public static final class fn extends x {
+                        private fn() {
+                            // utility class.
+                        }
+                    }
+                }
+                """;
+        header = Stream.of(entityClasses)
+                .flatmap(it -> Beans.getPropNameList(it).stream().map(e -> Pair.of(e, it.getSimpleName())).toList())
+                .groupBy(it -> it.getLeft(), it -> it.getRight())
+                .sortedBy(it -> it.getKey())
+                .map(it -> {
+                    String field = "    /** field name in entities: " + it.getValue().stream().sorted().toList() + " */" + LINE_SEPARATOR
+                            + "    public static final String " + it.getKey() + " = \"" + it.getKey() + "\";" + LINE_SEPARATOR;
+                    return field;
+                })
+                .join(LINE_SEPARATOR, header, tail);
+
+        File file = new File("./src/main/java/net/mi/erp/util/x.java");
+
+        IOUtil.write(header, file);
     }
 
 }
