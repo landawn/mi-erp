@@ -5,6 +5,9 @@ package net.mi.erp.entity;
  */
 public interface x { // NOSONAR
 
+    /** Property(field) name {@code "aclGroups"} for classes: {@code [AclUser]} */
+    String aclGroups = "aclGroups";
+
     /** Property(field) name {@code "addressId"} for classes: {@code [EmployeeAddress]} */
     String addressId = "addressId";
 
