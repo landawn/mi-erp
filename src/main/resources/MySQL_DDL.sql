@@ -117,7 +117,7 @@ CREATE TABLE project
 
 -- acl user
 DROP TABLE IF EXISTS acl_user_group;
-DROP TABLE IF EXISTS acl_ug_target;
+DROP TABLE IF EXISTS acl_user_group_target;
 DROP TABLE IF EXISTS acl_user;
 CREATE TABLE acl_user
 (
@@ -142,7 +142,7 @@ CREATE TABLE acl_user
 
 -- acl group.
 DROP TABLE IF EXISTS acl_user_group;
-DROP TABLE IF EXISTS acl_ug_target;
+DROP TABLE IF EXISTS acl_user_group_target;
 DROP TABLE IF EXISTS acl_group;
 CREATE TABLE acl_group
 (
@@ -189,7 +189,7 @@ CREATE TABLE acl_user_group
 
 
 -- acl_target.
-DROP TABLE IF EXISTS acl_ug_target;
+DROP TABLE IF EXISTS acl_user_group_target;
 DROP TABLE IF EXISTS acl_target;
 CREATE TABLE acl_target
 (
@@ -222,9 +222,9 @@ CREATE TABLE acl_target
   DEFAULT CHARSET = utf8mb4;
 
 
--- acl_ug_target
-DROP TABLE IF EXISTS acl_ug_target;
-CREATE TABLE acl_ug_target
+-- acl_user_group_target
+DROP TABLE IF EXISTS acl_user_group_target;
+CREATE TABLE acl_user_group_target
 (
     id                INT        NOT NULL AUTO_INCREMENT,
     user_id           INT                 DEFAULT 0,

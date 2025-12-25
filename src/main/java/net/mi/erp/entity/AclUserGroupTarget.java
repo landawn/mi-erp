@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "acl_ug_target")
-public class AclUgTarget {
+@Table(name = "acl_user_group_target")
+public class AclUserGroupTarget {
 
     @Id
     @ReadOnly
