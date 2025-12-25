@@ -1,4 +1,4 @@
-package org.mi.erp;
+package net.mi.erp;
 
 import org.junit.jupiter.api.Test;
 
