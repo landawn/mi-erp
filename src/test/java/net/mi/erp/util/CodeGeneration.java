@@ -49,9 +49,15 @@ class CodeGeneration {
                 .list(String.class);
 
         final Map<String, String> additionLinesMap = new HashMap<>();
+
         additionLinesMap.put("employee", """
                     @JoinedBy({ "id=EmployeeAddress.employeeId", "EmployeeAddress.addressId=Address.id" })
                     private List<Address> addresses;
+                """);
+
+        additionLinesMap.put("acl_user", """
+                    @JoinedBy({ "id=AclUserGroup.userId", "AclUserGroup.groupId=AclGroup.id" })
+                    private List<AclGroup> aclGroups;
                 """);
 
         final Map<String, List<String>> classNamesToImportMap = new HashMap<>();

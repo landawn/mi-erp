@@ -1,7 +1,10 @@
 package net.mi.erp.entity;
+import java.util.List;
+
 
 import com.landawn.abacus.annotation.Column;
 import com.landawn.abacus.annotation.Id;
+import com.landawn.abacus.annotation.JoinedBy;
 import com.landawn.abacus.annotation.ReadOnly;
 import com.landawn.abacus.annotation.Table;
 
@@ -42,5 +45,8 @@ public class AclUser {
     @ReadOnly
     @Column(name = "created_time")
     private java.sql.Timestamp createdTime;
+
+    @JoinedBy({ "id=AclUserGroup.userId", "AclUserGroup.groupId=AclGroup.id" })
+    private List<AclGroup> aclGroups;
 
 }

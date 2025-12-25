@@ -388,7 +388,7 @@ public enum UnifiedStatus {
      * 
      * <p><b>Usage Examples:</b></p>
      * <pre>{@code
-     * Status status = Status.fromCode(42);     // Returns PROCESSING
+     * Status status = Status.fromCode(1);     // Returns ACTIVE
      * Status invalid = Status.fromCode(999);   // Returns null
      * }</pre>
      *
