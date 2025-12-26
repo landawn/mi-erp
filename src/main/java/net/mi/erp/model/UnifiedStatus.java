@@ -69,7 +69,7 @@ public enum UnifiedStatus {
      * Active status (code: 1).
      * Indicates the entity is currently active and operational.
      */
-    ACTIVE(100),
+    ACTIVE(1),
 
     /**
      * Suspended status (code: 2).
@@ -368,7 +368,7 @@ public enum UnifiedStatus {
      * <p><b>Usage Examples:</b></p>
      * <pre>{@code
      * Status status = Status.ACTIVE;
-     * int code = status.code();   // Returns 2
+     * int code = status.code();   // Returns 1
      * }</pre>
      *
      * @return the numeric code for this status
