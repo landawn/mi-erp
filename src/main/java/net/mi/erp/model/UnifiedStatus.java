@@ -14,6 +14,10 @@
 
 package net.mi.erp.model;
 
+import com.landawn.abacus.util.AccountStatus;
+import com.landawn.abacus.util.ServiceStatus;
+import com.landawn.abacus.util.WeekDay;
+
 /**
  * Enumeration representing various status states for entities, services, processes, and operations.
  * Each status has an associated numeric code for efficient storage and comparison.
@@ -35,7 +39,7 @@ package net.mi.erp.model;
  * <pre>{@code
  * // Using status in an entity
  * Status orderStatus = Status.PROCESSING;
- * int statusCode = orderStatus.getCode();   // Returns 32
+ * int statusCode = orderStatus.code();   // Returns 32
  * 
  * // Retrieving status from code
  * Status retrieved = Status.fromCode(32);   // Returns PROCESSING
@@ -65,7 +69,7 @@ public enum UnifiedStatus {
      * Active status (code: 1).
      * Indicates the entity is currently active and operational.
      */
-    ACTIVE(1),
+    ACTIVE(100),
 
     /**
      * Suspended status (code: 2).
@@ -364,12 +368,12 @@ public enum UnifiedStatus {
      * <p><b>Usage Examples:</b></p>
      * <pre>{@code
      * Status status = Status.ACTIVE;
-     * int code = status.getCode();   // Returns 2
+     * int code = status.code();   // Returns 2
      * }</pre>
      *
      * @return the numeric code for this status
      */
-    public int getCode() {
+    public int code() {
         return code;
     }
 

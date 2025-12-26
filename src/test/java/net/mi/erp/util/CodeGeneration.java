@@ -33,7 +33,7 @@ class CodeGeneration {
     static final String LINE_SEPARATOR = IOUtil.LINE_SEPARATOR_UNIX;
 
     static final String url = "jdbc:mysql://localhost:3306/mi_erp";
-    static final DataSource dataSource = JdbcUtil.createHikariDataSource(url, "root", "admin");
+    static final DataSource ds = JdbcUtil.createHikariDataSource(url, "root", "admin");
 
     public static void main(String[] args) throws Exception {
         generateEntityClass();
@@ -46,7 +46,7 @@ class CodeGeneration {
         // List<String> tableNames = List.of("employee", "address", "employee_address", "project");
 
         List<String> tableNames = JdbcUtil
-                .prepareQuery(dataSource, "SELECT table_name FROM information_schema.tables  where table_schema = 'mi_erp' ORDER BY table_name")
+                .prepareQuery(ds, "SELECT table_name FROM information_schema.tables  where table_schema = 'mi_erp' ORDER BY table_name")
                 .list(String.class);
 
         final Map<String, String> additionLinesMap = new HashMap<>();
@@ -71,7 +71,7 @@ class CodeGeneration {
                 .readOnlyFields(N.asSet("id", "uuid", "createdTime", "lastUpdatedTime"))
                 .fieldTypeConverter(
                         (_, _, columnName, columnClassName) -> columnName.equalsIgnoreCase("status") ? "net.mi.erp.model.UnifiedStatus" : columnClassName)
-                .customizedFieldDbTypes(N.asList(Tuple.of("status", "enumerated = EnumBy.ORDINAL")))
+                .customizedFieldDbTypes(N.asList(Tuple.of("status", "enumerated = EnumType.CODE")))
                 // .classNamesToImport(N.asList(ClassUtil.getCanonicalClassName(UnifiedStatus.class)))
                 .generateBuilder(true)
                 .chainAccessor(false)
@@ -82,7 +82,7 @@ class CodeGeneration {
             ecc.setAdditionalFieldsOrLines(additionLinesMap.get(tableName));
             ecc.setClassNamesToImport(classNamesToImportMap.get(tableName));
 
-            JdbcCodeGenerationUtil.generateEntityClass(dataSource, tableName, ecc);
+            JdbcCodeGenerationUtil.generateEntityClass(ds, tableName, ecc);
         }
     }
 

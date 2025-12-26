@@ -8,7 +8,7 @@ import com.landawn.abacus.annotation.JoinedBy;
 import com.landawn.abacus.annotation.ReadOnly;
 import com.landawn.abacus.annotation.Table;
 import com.landawn.abacus.annotation.Type;
-import com.landawn.abacus.annotation.Type.EnumBy;
+import com.landawn.abacus.util.EnumType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +38,7 @@ public class AclUser {
     private String description;
 
     @Column(name = "status")
-    @Type(enumerated = EnumBy.ORDINAL)
+    @Type(enumerated = EnumType.CODE)
     private net.mi.erp.model.UnifiedStatus status;
 
     @ReadOnly
