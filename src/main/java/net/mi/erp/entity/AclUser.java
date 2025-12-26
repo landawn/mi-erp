@@ -49,7 +49,7 @@ public class AclUser {
     @Column(name = "created_time")
     private java.sql.Timestamp createdTime;
 
-    @JoinedBy({ "id=AclUserGroup.userId", "AclUserGroup.groupId=AclGroup.id" })
+    @JoinedBy({"id=AclUserGroup.userId", "AclUserGroup.groupId=AclGroup.id"})
     private List<AclGroup> aclGroups;
 
 }

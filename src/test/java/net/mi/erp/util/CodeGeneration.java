@@ -51,14 +51,24 @@ class CodeGeneration {
 
         final Map<String, String> additionLinesMap = new HashMap<>();
 
+        additionLinesMap.put("login", """
+                    @JoinedBy("accountId=Account.id")
+                    private Account account;
+                """);
+
         additionLinesMap.put("employee", """
-                    @JoinedBy({ "id=EmployeeAddress.employeeId", "EmployeeAddress.addressId=Address.id" })
+                    @JoinedBy({"id=EmployeeAddress.employeeId", "EmployeeAddress.addressId=Address.id"})
                     private List<Address> addresses;
                 """);
 
         additionLinesMap.put("acl_user", """
-                    @JoinedBy({ "id=AclUserGroup.userId", "AclUserGroup.groupId=AclGroup.id" })
+                    @JoinedBy({"id=AclUserGroup.userId", "AclUserGroup.groupId=AclGroup.id"})
                     private List<AclGroup> aclGroups;
+                """);
+
+        additionLinesMap.put("acl_group", """
+                    @JoinedBy({"id=AclUserGroup.groupId", "AclUserGroup.userId=AclUser.id"})
+                    private List<AclUser> aclUsers;
                 """);
 
         final Map<String, List<String>> classNamesToImportMap = new HashMap<>();

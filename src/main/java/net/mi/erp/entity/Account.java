@@ -16,52 +16,32 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "address")
-public class Address {
+@Table(name = "account")
+public class Account {
 
     @Id
     @ReadOnly
     @Column(name = "id")
     private int id;
 
-    @Column(name = "address_line")
-    private String addressLine;
+    @ReadOnly
+    @Column(name = "uuid")
+    private String uuid;
 
-    @Column(name = "address_line2")
-    private String addressLine2;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @Column(name = "unit_number")
-    private String unitNumber;
+    @Column(name = "middle_name")
+    private String middleName;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "last_name")
+    private String lastName;
 
-    @Column(name = "state")
-    private String state;
+    @Column(name = "birth_date")
+    private java.sql.Date birthDate;
 
-    @Column(name = "postal_code")
-    private String postalCode;
-
-    @Column(name = "country_code")
-    private String countryCode;
-
-    @Column(name = "mobile")
-    private String mobile;
-
-    @Column(name = "telephone")
-    private String telephone;
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "type")
-    private int type;
-
-    @Column(name = "comments")
-    private String comments;
-
-    @Column(name = "is_primary")
-    private boolean isPrimary;
+    @Column(name = "email_address")
+    private String emailAddress;
 
     @Column(name = "status")
     @Type(enumerated = EnumType.CODE)

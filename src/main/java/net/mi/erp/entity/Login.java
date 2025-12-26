@@ -2,6 +2,7 @@ package net.mi.erp.entity;
 
 import com.landawn.abacus.annotation.Column;
 import com.landawn.abacus.annotation.Id;
+import com.landawn.abacus.annotation.JoinedBy;
 import com.landawn.abacus.annotation.ReadOnly;
 import com.landawn.abacus.annotation.Table;
 import com.landawn.abacus.annotation.Type;
@@ -16,52 +17,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "address")
-public class Address {
+@Table(name = "login")
+public class Login {
 
     @Id
     @ReadOnly
     @Column(name = "id")
     private int id;
 
-    @Column(name = "address_line")
-    private String addressLine;
+    @Column(name = "account_id")
+    private int accountId;
 
-    @Column(name = "address_line2")
-    private String addressLine2;
+    @Column(name = "login_id")
+    private String loginId;
 
-    @Column(name = "unit_number")
-    private String unitNumber;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "state")
-    private String state;
-
-    @Column(name = "postal_code")
-    private String postalCode;
-
-    @Column(name = "country_code")
-    private String countryCode;
-
-    @Column(name = "mobile")
-    private String mobile;
-
-    @Column(name = "telephone")
-    private String telephone;
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "type")
-    private int type;
-
-    @Column(name = "comments")
-    private String comments;
-
-    @Column(name = "is_primary")
-    private boolean isPrimary;
+    @Column(name = "login_password")
+    private String loginPassword;
 
     @Column(name = "status")
     @Type(enumerated = EnumType.CODE)
@@ -74,5 +45,8 @@ public class Address {
     @ReadOnly
     @Column(name = "created_time")
     private java.sql.Timestamp createdTime;
+
+    @JoinedBy("accountId=Account.id")
+    private Account account;
 
 }

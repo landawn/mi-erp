@@ -1,3 +1,61 @@
+-- ====== account table.
+DROP TABLE IF EXISTS login;
+DROP TABLE IF EXISTS account;
+
+CREATE TABLE account
+(
+    id                INT         NOT NULL AUTO_INCREMENT,
+    uuid              VARCHAR(64) NOT NULL DEFAULT (UUID()),
+
+    first_name        VARCHAR(32) NOT NULL,
+    middle_name       VARCHAR(32),
+    last_name         VARCHAR(32) NOT NULL,
+    birth_date        DATE,
+    email_address     VARCHAR(128),
+
+    -- common columns for all tables
+    status            TINYINT     NOT NULL DEFAULT 0,
+    last_updated_time TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_time      TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id),
+
+    UNIQUE (uuid),
+    UNIQUE (email_address),
+
+    INDEX (first_name),
+    INDEX (last_name),
+    INDEX (birth_date)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1000000
+  DEFAULT CHARSET = utf8mb4;
+
+
+-- ====== login table
+
+DROP TABLE IF EXISTS login;
+CREATE TABLE login
+(
+    id                INT          NOT NULL AUTO_INCREMENT,
+    account_id        INT          NOT NULL,
+
+    login_id          VARCHAR(128) NOT NULL,
+    login_password    VARCHAR(128) NOT NULL,
+
+    -- common columns for all tables
+    status            TINYINT      NOT NULL DEFAULT 0,
+    last_updated_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_time      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id),
+    UNIQUE (login_id),
+
+    FOREIGN KEY (account_id) REFERENCES account (id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1000000
+  DEFAULT CHARSET = utf8mb4;
+
+
 -- ====== employee
 
 DROP TABLE IF EXISTS employee_address;
@@ -45,6 +103,10 @@ CREATE TABLE address
     state             VARCHAR(128)          DEFAULT NULL,
     postal_code       VARCHAR(32)  NOT NULL,
     country_code      CHAR(3)      NOT NULL COMMENT 'ISO-3166-1 alpha-2',
+
+    mobile            VARCHAR(16)           DEFAULT NULL,
+    telephone         VARCHAR(16)           DEFAULT NULL,
+    email             VARCHAR(64)           DEFAULT NULL,
 
     type              TINYINT      NOT NULL DEFAULT 0 COMMENT '0=default, 1=home, 2=business, 4=office',
     comments          VARCHAR(256)          DEFAULT NULL,
