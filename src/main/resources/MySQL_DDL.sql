@@ -112,7 +112,7 @@ CREATE TABLE address
 
     mobile            VARCHAR(16),
     telephone         VARCHAR(16),
-    email             VARCHAR(64),
+    email             VARCHAR(128),
 
     type              TINYINT      NOT NULL DEFAULT 0 COMMENT '0=default, 1=home, 2=business, 4=office',
     comments          VARCHAR(256),
@@ -163,7 +163,7 @@ CREATE TABLE project
     uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
     name              VARCHAR(256) NOT NULL,
-    code              VARCHAR(256),
+    code              VARCHAR(128),
     description       VARCHAR(4096),
 
     start_date        DATETIME,
