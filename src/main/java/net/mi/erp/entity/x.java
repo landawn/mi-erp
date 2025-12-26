@@ -5,6 +5,9 @@ package net.mi.erp.entity;
  */
 public interface x { // NOSONAR
 
+    /** Property(field) name {@code "account"} for classes: {@code [Login]} */
+    String account = "account";
+
     /** Property(field) name {@code "accountId"} for classes: {@code [Login]} */
     String accountId = "accountId";
 
@@ -68,6 +71,9 @@ public interface x { // NOSONAR
     /** Property(field) name {@code "firstName"} for classes: {@code [Account, Employee]} */
     String firstName = "firstName";
 
+    /** Property(field) name {@code "gender"} for classes: {@code [Account]} */
+    String gender = "gender";
+
     /** Property(field) name {@code "groupId"} for classes: {@code [AclUserGroup, AclUserGroupTarget]} */
     String groupId = "groupId";
 
@@ -76,6 +82,9 @@ public interface x { // NOSONAR
 
     /** Property(field) name {@code "isPrimary"} for classes: {@code [Address]} */
     String isPrimary = "isPrimary";
+
+    /** Property(field) name {@code "lastLoginTime"} for classes: {@code [Login]} */
+    String lastLoginTime = "lastLoginTime";
 
     /** Property(field) name {@code "lastName"} for classes: {@code [Account, Employee]} */
     String lastName = "lastName";
@@ -125,7 +134,7 @@ public interface x { // NOSONAR
     /** Property(field) name {@code "telephone"} for classes: {@code [Address]} */
     String telephone = "telephone";
 
-    /** Property(field) name {@code "type"} for classes: {@code [AclTarget, Address]} */
+    /** Property(field) name {@code "type"} for classes: {@code [Account, AclTarget, Address]} */
     String type = "type";
 
     /** Property(field) name {@code "unitNumber"} for classes: {@code [Address]} */

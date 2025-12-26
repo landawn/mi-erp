@@ -34,6 +34,9 @@ public class Login {
     @Column(name = "login_password")
     private String loginPassword;
 
+    @Column(name = "last_login_time")
+    private java.sql.Timestamp lastLoginTime;
+
     @Column(name = "status")
     @Type(enumerated = EnumType.CODE)
     private net.mi.erp.model.UnifiedStatus status;

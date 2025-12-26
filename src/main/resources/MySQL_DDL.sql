@@ -7,11 +7,15 @@ CREATE TABLE account
     id                INT          NOT NULL AUTO_INCREMENT,
     uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
-    first_name        VARCHAR(32)  NOT NULL,
+    first_name        VARCHAR(64)  NOT NULL,
     middle_name       VARCHAR(32),
-    last_name         VARCHAR(32)  NOT NULL,
+    last_name         VARCHAR(64)  NOT NULL,
     birth_date        DATE,
+    gender            VARCHAR(32),
+
     email_address     VARCHAR(128) NOT NULL,
+
+    type              VARCHAR(32),
 
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
@@ -42,6 +46,8 @@ CREATE TABLE login
     login_id          VARCHAR(128) NOT NULL,
     login_password    VARCHAR(128) NOT NULL,
 
+    last_login_time   TIMESTAMP,
+
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
     last_updated_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -69,7 +75,7 @@ CREATE TABLE employee
     employee_no       INT         NOT NULL,
 
     first_name        VARCHAR(64) NOT NULL,
-    middle_name       VARCHAR(32)          DEFAULT NULL,
+    middle_name       VARCHAR(32),
     last_name         VARCHAR(64) NOT NULL,
 
     -- common columns for all tables
@@ -87,29 +93,29 @@ CREATE TABLE employee
 
 -- ====== address
 
-DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS employee_address;
+DROP TABLE IF EXISTS address;
 
 CREATE TABLE address
 (
     id                INT          NOT NULL AUTO_INCREMENT,
 
-    address_line      VARCHAR(255) NOT NULL,
-    address_line2     VARCHAR(255)          DEFAULT NULL,
+    address_line      VARCHAR(256) NOT NULL,
+    address_line2     VARCHAR(256),
 
-    unit_number       VARCHAR(32)           DEFAULT NULL,
+    unit_number       VARCHAR(32),
 
     city              VARCHAR(128) NOT NULL,
-    state             VARCHAR(128)          DEFAULT NULL,
+    state             VARCHAR(128),
     postal_code       VARCHAR(32)  NOT NULL,
     country_code      CHAR(3)      NOT NULL COMMENT 'ISO-3166-1 alpha-2',
 
-    mobile            VARCHAR(16)           DEFAULT NULL,
-    telephone         VARCHAR(16)           DEFAULT NULL,
-    email             VARCHAR(64)           DEFAULT NULL,
+    mobile            VARCHAR(16),
+    telephone         VARCHAR(16),
+    email             VARCHAR(64),
 
     type              TINYINT      NOT NULL DEFAULT 0 COMMENT '0=default, 1=home, 2=business, 4=office',
-    comments          VARCHAR(256)          DEFAULT NULL,
+    comments          VARCHAR(256),
     is_primary        BOOLEAN      NOT NULL DEFAULT FALSE,
 
     -- common columns for all tables
@@ -156,12 +162,12 @@ CREATE TABLE project
     id                INT          NOT NULL AUTO_INCREMENT,
     uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
-    name              VARCHAR(255) NOT NULL,
-    code              VARCHAR(255)          DEFAULT NULL,
-    description       VARCHAR(4096)         DEFAULT NULL,
+    name              VARCHAR(256) NOT NULL,
+    code              VARCHAR(256),
+    description       VARCHAR(4096),
 
-    start_date        DATETIME              DEFAULT NULL,
-    end_date          DATETIME              DEFAULT NULL,
+    start_date        DATETIME,
+    end_date          DATETIME,
 
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
@@ -177,7 +183,7 @@ CREATE TABLE project
   DEFAULT CHARSET = utf8mb4;
 
 
--- acl user
+-- ====== acl user
 DROP TABLE IF EXISTS acl_user_group;
 DROP TABLE IF EXISTS acl_user_group_target;
 DROP TABLE IF EXISTS acl_user;
@@ -187,7 +193,7 @@ CREATE TABLE acl_user
     uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
     name              VARCHAR(128) NOT NULL,
-    description       VARCHAR(1024)         DEFAULT NULL,
+    description       VARCHAR(1024),
 
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
@@ -202,7 +208,7 @@ CREATE TABLE acl_user
   DEFAULT CHARSET = utf8mb4;
 
 
--- acl group.
+-- ====== acl group.
 DROP TABLE IF EXISTS acl_user_group;
 DROP TABLE IF EXISTS acl_user_group_target;
 DROP TABLE IF EXISTS acl_group;
@@ -212,7 +218,7 @@ CREATE TABLE acl_group
     uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
     name              VARCHAR(128) NOT NULL,
-    description       VARCHAR(1024)         DEFAULT NULL,
+    description       VARCHAR(1024),
 
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
@@ -227,14 +233,14 @@ CREATE TABLE acl_group
   DEFAULT CHARSET = utf8mb4;
 
 
--- acl_user_group
+-- ====== acl_user_group
 DROP TABLE IF EXISTS acl_user_group;
 CREATE TABLE acl_user_group
 (
     id                INT       NOT NULL AUTO_INCREMENT,
     user_id           INT       NOT NULL,
     group_id          INT       NOT NULL,
-    description       VARCHAR(1024)      DEFAULT NULL,
+    description       VARCHAR(1024),
 
     -- common columns for all tables
     status            TINYINT   NOT NULL DEFAULT 0,
@@ -250,7 +256,7 @@ CREATE TABLE acl_user_group
   DEFAULT CHARSET = utf8mb4;
 
 
--- acl_target.
+-- ====== acl_target.
 DROP TABLE IF EXISTS acl_user_group_target;
 DROP TABLE IF EXISTS acl_target;
 CREATE TABLE acl_target
@@ -264,7 +270,7 @@ CREATE TABLE acl_target
     type              VARCHAR(64)  NOT NULL,
     sub_type          VARCHAR(64)  NOT NULL,
 
-    description       VARCHAR(1024)         DEFAULT NULL,
+    description       VARCHAR(1024),
 
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
@@ -284,7 +290,7 @@ CREATE TABLE acl_target
   DEFAULT CHARSET = utf8mb4;
 
 
--- acl_user_group_target
+-- ====== acl_user_group_target
 DROP TABLE IF EXISTS acl_user_group_target;
 CREATE TABLE acl_user_group_target
 (
@@ -294,7 +300,7 @@ CREATE TABLE acl_user_group_target
     target_id         INT        NOT NULL,
 
     privilege         BIGINT(20) NOT NULL,
-    description       VARCHAR(1024)       DEFAULT NULL,
+    description       VARCHAR(1024),
 
     -- common columns for all tables
     status            TINYINT    NOT NULL DEFAULT 0,

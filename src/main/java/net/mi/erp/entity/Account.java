@@ -40,8 +40,14 @@ public class Account {
     @Column(name = "birth_date")
     private java.sql.Date birthDate;
 
+    @Column(name = "gender")
+    private String gender;
+
     @Column(name = "email_address")
     private String emailAddress;
+
+    @Column(name = "type")
+    private String type;
 
     @Column(name = "status")
     @Type(enumerated = EnumType.CODE)
