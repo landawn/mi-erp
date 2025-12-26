@@ -4,19 +4,19 @@ DROP TABLE IF EXISTS account;
 
 CREATE TABLE account
 (
-    id                INT         NOT NULL AUTO_INCREMENT,
-    uuid              VARCHAR(64) NOT NULL DEFAULT (UUID()),
+    id                INT          NOT NULL AUTO_INCREMENT,
+    uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
-    first_name        VARCHAR(32) NOT NULL,
+    first_name        VARCHAR(32)  NOT NULL,
     middle_name       VARCHAR(32),
-    last_name         VARCHAR(32) NOT NULL,
+    last_name         VARCHAR(32)  NOT NULL,
     birth_date        DATE,
-    email_address     VARCHAR(128),
+    email_address     VARCHAR(128) NOT NULL,
 
     -- common columns for all tables
-    status            TINYINT     NOT NULL DEFAULT 0,
-    last_updated_time TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    created_time      TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status            TINYINT      NOT NULL DEFAULT 0,
+    last_updated_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_time      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id),
 

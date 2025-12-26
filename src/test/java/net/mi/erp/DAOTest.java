@@ -35,7 +35,7 @@ public class DAOTest {
 
     @Test
     public void test_LoginDAO() {
-        Account account = Account.builder().firstName("Jack").lastName("Johnson").status(UnifiedStatus.ACTIVE).build();
+        Account account = Account.builder().firstName("Jack").lastName("Johnson").emailAddress("jack@email.com").status(UnifiedStatus.ACTIVE).build();
         int accountId = accountDAO.insert(account);
         Account accountFromDB = accountDAO.gett(accountId);
         N.println(accountFromDB);
