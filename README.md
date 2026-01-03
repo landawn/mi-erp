@@ -18,9 +18,9 @@
     * **iOS Developers:** 5.
     * **Android Developers:** 5.
     * **Quality Assurance:** 9.
-    * **AI Specialists/DevOps:** 7.
+    * **DevOps/AI Specialists:** 7.
     * **Security:** 5.
-    * **Management, Design & Docs:** 9.
+    * **Product/project Management, Design & Docs:** 9.
 
 ---
 
@@ -29,7 +29,7 @@
 * **Complexity per API:**
     * **Controller:** 1 endpoint (100 LOC).
     * **Service Layer:** 2 methods (100 LOC per method).
-    * **Data Access Layer (DAL):** 5 methods (30 LOC per method).
+    * **Data Access Layer (DAL):** 3 methods (30 LOC per method).
 
 ---
 
@@ -40,20 +40,20 @@
 | :--- | :--- | :--- |
 | **Controller** | 3,000 APIs × 100 LOC | 300,000 |
 | **Service** | 3,000 APIs × 2 methods × 100 LOC | 600,000 |
-| **DAL** | 3,000 APIs × 5 methods × 30 LOC | 450,000 |
-| **Subtotal** | | **1,350,000** |
-| **Shared Libs** | 20% Overhead | + 270,000 |
-| **Total Production**| | **1,620,000** |
+| **DAL** | 3,000 APIs × 3 methods × 30 LOC | 270,000 |
+| **Subtotal** | | **1,170,000** |
+| **Shared Libs** | 20% Overhead | + 234,000 |
+| **Total Production**| | **1,304,000** |
 
 ### Test Code
 * **Ratio:** 2 lines of test code per 1 line of production code.
-* **Total Test LOC:** 3,240,000
+* **Total Test LOC:** 2,608,000
 
 ##### **Grand Total Project Scope**
-> **4,860,000 Lines of Code**
+> **3,912,000 Lines of Code**
 
 ##### **Grand Total Project Scope for Backend Dev**
-> **3,240,000 LOC** = **1,620,000 Production LOC** + **1,620,000 Test LOC** *(dev write 50% test code)*
+> **2,608,000 LOC** = **1,304,000 Production LOC** + **1,304,000 Test LOC** *(dev write 50% test code)*
 
 
 ### Research done by ChatGPT
