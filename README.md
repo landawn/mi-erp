@@ -1,14 +1,11 @@
 # mi-erp
 
-
-
 # Project Resource Plan & Feasibility Analysis: Enterprise CRM/ERP (v3, [v2](https://github.com/landawn/mi-erp/blob/main/docs/README_v2.md), [v1](https://github.com/landawn/mi-erp/blob/main/docs/README_v1.md))
 
 ## Project Overview
 * **Objective:** Develop a world-class CRM/ERP system.
 * **Timeline:** 1 Year (180 effective working days).
 * **Team size:** 80 persons.
-
 
 ## Team Resource Allocation
 
@@ -47,14 +44,13 @@
 
 ### Test Code
 * **Ratio:** 2 lines of test code per 1 line of production code.
-* **Total Test LOC:** 2,808,000
+* **Total Test LOC:** **2,808,000**
 
 ##### **Grand Total Project Scope**
 > **4,212,000 Lines of Code**
 
 ##### **Grand Total Project Scope for Backend Dev**
 > **2,808,000 LOC** = **1,404,000 Production LOC** + **1,404,000 Test LOC** *(dev write 50% test code)*
-
 
 ### Research done by ChatGPT
 
@@ -65,6 +61,7 @@
 * [What is the typical backend-to-frontend code ratio for a web-based ERP system?](https://github.com/landawn/mi-erp/blob/main/docs/What%20is%20the%20typical%20backend-to-frontend%20code%20ratio%20for%20a%20web-based%20ERP%20system.md)
 
 * [What is the typical backend-to-iOS-app developer ratio for a web-based ERP system?](https://github.com/landawn/mi-erp/blob/main/docs/What%20is%20the%20typical%20backend-to-iOS-app%20developer%20ratio%20for%20a%20web-based%20ERP%20system.md)
+
 ---
 
 ## Feasibility Analysis
@@ -79,10 +76,9 @@ $$
 $$
 
 ### The Reality Gap
-*  **Required Output:** 780 lines per day, per person.
-*  **Industry Average:** 20-50 lines of *finished, debugged* code per day for complex enterprise systems—*low, with plenty of room for improvement*
-*  **Discrepancy:** The plan requires a pace **18x–45x faster** than the industry standard.
-
+*  **Required Output:** ~780 lines per day, per person.
+*  **Industry Average:** 20–50 lines of *finished, debugged* code per day for complex enterprise systems—*low, with plenty of room for improvement*
+*  **Discrepancy:** The plan requires a pace **≈15×–39× faster** than the industry standard.
 
 ### Nonetheless, I believe it is still achievable under certain exceptional conditions:
 
@@ -99,8 +95,8 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ### Example: 100 tables (baseline assumptions)
 
-* Production LOC (target): 140,400
-* Test LOC (target): 280,800
+* Production LOC (target): **140,400**
+* Test LOC (target): **280,800**
 * → **Total LOC**: **421,200**
 
 ---
@@ -183,9 +179,9 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ### Plan B: based on 3 backend + 2 frontend + 1 UX developers in 3 months to develop a demo ERP system
 
-* Production LOC (target): 162,000
+* Production LOC (target): **140,400**
 * Test LOC (target): 0 (*No test code*)
-* → **Total LOC**: **162,000**
+* → **Total LOC**: **140,400**
 
  
 #### Day 1–10 (10 working days, ~2 weeks) — Schema & table design (3 backend developers)
