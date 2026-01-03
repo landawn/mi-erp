@@ -43,17 +43,17 @@
 | **DAL** | 3,000 APIs × 3 methods × 30 LOC | 270,000 |
 | **Subtotal** | | **1,170,000** |
 | **Shared Libs** | 20% Overhead | + 234,000 |
-| **Total Production**| | **1,304,000** |
+| **Total Production**| | **1,404,000** |
 
 ### Test Code
 * **Ratio:** 2 lines of test code per 1 line of production code.
-* **Total Test LOC:** 2,608,000
+* **Total Test LOC:** 2,808,000
 
 ##### **Grand Total Project Scope**
-> **3,912,000 Lines of Code**
+> **4,212,000 Lines of Code**
 
 ##### **Grand Total Project Scope for Backend Dev**
-> **2,608,000 LOC** = **1,304,000 Production LOC** + **1,304,000 Test LOC** *(dev write 50% test code)*
+> **2,808,000 LOC** = **1,404,000 Production LOC** + **1,404,000 Test LOC** *(dev write 50% test code)*
 
 
 ### Research done by ChatGPT
