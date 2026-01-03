@@ -39,7 +39,7 @@
 | **Service** | 3,000 APIs × 2 methods × 100 LOC | 600,000 |
 | **DAL** | 3,000 APIs × 3 methods × 30 LOC | 270,000 |
 | **Subtotal** | | **1,170,000** |
-| **Shared Libs** | 20% Overhead | +234,000 |
+| **Shared Libs** | 20% Overhead | + 234,000 |
 | **Total Production**| | **1,404,000** |
 
 ### Test Code
@@ -84,11 +84,12 @@ $$
 
 * **Highly mature frameworks** (e.g., *JDK 25+*, *Spring 7+*, *log4j2*, *Jackson*, *Guava*).
 * **Extremely productive libraries and tooling** (e.g., *abacus-common*, *abacus-jdbc*).
-* **Small, highly efficient teams with rapid communication** (e.g., *80% coding / 20% coordination*).
+* **Small, highly efficient teams with rapid communication** (e.g., *80% coding, 20% coordination*).
 * **Very strong senior/10x engineers**.
 * *AI-assisted development and automation*.
 
 Together, these factors significantly boost productivity and reduce cognitive overhead, resulting in simpler and faster development.
+
 
 ---
 
@@ -102,11 +103,79 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ### Plan A: based on 5 backend developers in 3.5 months
 
-#### … *(rest of content unchanged, numbers inferred from corrected totals above)*
+ 
+#### Day 1–8 (8 working days, ~2 weeks) — Schema & table design (5 backend developers)
 
-*(content continues exactly as before except where numbers below are used)*
+* Task: design **100 tables**, ~**30 columns/table** on average.
+* Throughput: ~**2.5 tables per developer per day**.
 
 ---
+
+#### Day 9-12 (4 working days, ~1 week) — Code generation review
+
+* Task: generated **100 Entity classes**, **100 DTO classes**, **100 DAO classes** by tools and review them.
+
+  * Entity ≈ **100 LOC** each → 10,000 LOC
+  * DTO ≈ **100 LOC** each → 10,000 LOC
+  * DAO ≈ **300 LOC** each → 30,000 LOC
+  * → **Generated total** = **50,000 LOC**
+
+* Throughput: ~**5 tables x 3 Entity/DTO/DAO classes = 15 classes per developer per day**.
+* Since this code is generated, **most of it requires little to no hand-coding**.
+* Practical effort estimate for Day 9-12 (including reviews, minor edits, and test scaffolding): **100,000 LOC equivalent completed** = 50,000 production LOC + 50,000 test LOC (*ratio=1*).
+
+---
+
+#### Day 13-20 (8 working days, ~2 weeks) — Common controller/service scaffolding
+
+* Goal: set up common patterns and shared framework at controller/service level.
+* Each developer is responsible for **20 tables** → **20 tables × 3 APIs/table = 60 APIs per developer** (these are scaffolding endpoints that follow a shared pattern).
+* Productivity assumption: each developer completes **~8,000 production LOC** across eight days → **8,000 × 5 = 40,000 production LOC** total.
+* Testing for framework-level code is lighter, but counting effort conservatively: **total Day 13-20 deliverable = 80,000 LOC equivalent** = 40,000 production + 40,000 test LOC (*ratio=1*).
+
+---
+
+#### Next 21-60 (40 working days, ~2 months) — Implement API logic per table
+
+* Per developer responsibilities: **20 tables → 60 APIs**.
+* Estimated LOC per API:
+
+  * Controller: **100 LOC**
+  * Service: **200 LOC**
+  * DAL: **90 LOC**
+  * → **390 production LOC / API**
+* Per developer production work for 60 APIs: **60 × 390 = 23,400 LOC**.
+* Mirror testing estimate: **23,400 test LOC**.
+* **Total per developer** over 40 days: **46,800 LOC** (23,400 production + 23,400 test).
+* For **5 developers**: **46,800 × 5 = 234,000 LOC** delivered in those 40 working days.
+
+---
+
+#### Can this be reduced by reuse / AI?
+
+* If **half of the production code is boilerplate / highly similar**, then production LOC per dev over 40 days could drop from **23,400 → 11,700 LOC** (50% reduction).
+* If **AI generates 50% of the test code**, test LOC per dev drops from **23,400 → 11,700 LOC**.
+* Under those optimistic assumptions, per-developer hand-written LOC over the 40 days becomes:
+
+  * **11,700 production + 11,700 test = 23,400 LOC** each.
+  
+* Question: **Is ~23,400 LOC per developer in 40 working days realistic?** That equals **585 LOC/day**.
+
+---
+
+#### Summary / Conclusion
+
+* With heavy use of generation + patterns, 5 backend developers produce **~180K LOC** across design, generated code, scaffolding in the first 5 weeks.
+* With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day (2 months) implementation sprint could be reduced to **~23,400 LOC** (≈585 LOC/day) — achievable only under highly controlled conditions:
+
+  * excellent generation tooling and templates,
+  * very consistent API patterns,
+  * minimal context switching,
+  * strong developer experience and fast feedback loops,
+  * and a high proportion of repetitive / scaffoldable code.
+
+---
+
 
 ### Plan B: based on 3 backend + 2 frontend + 1 UX developers in 3 months to develop a demo ERP system
 
