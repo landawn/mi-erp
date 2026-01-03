@@ -224,4 +224,4 @@ Together, these factors significantly boost productivity and reduce cognitive ov
   * DAL: **90 LOC**
   * → **390 production LOC / API**
 * Per developer production work for 100 APIs: **100 × 390 = 39,000 LOC**.
-* For **3 developers**: **39,000 × 3 = 117000 LOC** delivered in two months.
+* For **3 developers**: **39,000 × 3 = 117,000 LOC** delivered in two months.
