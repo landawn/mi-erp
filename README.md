@@ -75,11 +75,11 @@
 To meet this deadline, the required velocity per developer is:
 
 $$
-\frac{3,240,000 \text{ LOC}}{20 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{900 \text{ LOC / day}}
+\frac{2,808,000 \text{ LOC}}{20 \text{ Devs} \times 180 \text{ Days}} \approx \mathbf{780 \text{ LOC / day}}
 $$
 
 ### The Reality Gap
-*  **Required Output:** 900 lines per day, per person.
+*  **Required Output:** 780 lines per day, per person.
 *  **Industry Average:** 20-50 lines of *finished, debugged* code per day for complex enterprise systems—*low, with plenty of room for improvement*
 *  **Discrepancy:** The plan requires a pace **18x–45x faster** than the industry standard.
 
@@ -99,9 +99,9 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ### Example: 100 tables (baseline assumptions)
 
-* Production LOC (target): 162,000
-* Test LOC (target): 324,000
-* → **Total LOC**: **486,000**
+* Production LOC (target): 140,400
+* Test LOC (target): 280,800
+* → **Total LOC**: **421,200**
 
 ---
 
@@ -146,31 +146,31 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
   * Controller: **100 LOC**
   * Service: **200 LOC**
-  * DAL: **150 LOC**
-  * → **450 production LOC / API**
-* Per developer production work for 60 APIs: **60 × 450 = 27,000 LOC**.
-* Mirror testing estimate: **27,000 test LOC**.
-* **Total per developer** over 40 days: **54,000 LOC** (27,000 production + 27,000 test).
-* For **5 developers**: **54,000 × 5 = 270,000 LOC** delivered in those 40 working days.
+  * DAL: **90 LOC**
+  * → **390 production LOC / API**
+* Per developer production work for 60 APIs: **60 × 390 = 23,400 LOC**.
+* Mirror testing estimate: **23,400 test LOC**.
+* **Total per developer** over 40 days: **46,800 LOC** (23,400 production + 23,400 test).
+* For **5 developers**: **46,800 × 5 = 234,000 LOC** delivered in those 40 working days.
 
 ---
 
 #### Can this be reduced by reuse / AI?
 
-* If **half of the production code is boilerplate / highly similar**, then production LOC per dev over 40 days could drop from **27,000 → 13,500 LOC** (50% reduction).
-* If **AI generates 50% of the test code**, test LOC per dev drops from **27,000 → 13,500 LOC**.
+* If **half of the production code is boilerplate / highly similar**, then production LOC per dev over 40 days could drop from **23,400 → 11,700 LOC** (50% reduction).
+* If **AI generates 50% of the test code**, test LOC per dev drops from **23,400 → 11,700 LOC**.
 * Under those optimistic assumptions, per-developer hand-written LOC over the 40 days becomes:
 
-  * **13,500 production + 13,500 test = 27,000 LOC** each.
+  * **11,700 production + 11,700 test = 23,400 LOC** each.
   
-* Question: **Is ~27,000 LOC per developer in 40 working days realistic?** That equals **675 LOC/day**.
+* Question: **Is ~23,400 LOC per developer in 40 working days realistic?** That equals **585 LOC/day**.
 
 ---
 
 #### Summary / Conclusion
 
 * With heavy use of generation + patterns, 5 backend developers produce **~180K LOC** across design, generated code, scaffolding in the first 5 weeks.
-* With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day (2 months) implementation sprint could be reduced to **~27,000 LOC** (≈675 LOC/day) — achievable only under highly controlled conditions:
+* With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day (2 months) implementation sprint could be reduced to **~23,400 LOC** (≈585 LOC/day) — achievable only under highly controlled conditions:
 
   * excellent generation tooling and templates,
   * very consistent API patterns,
