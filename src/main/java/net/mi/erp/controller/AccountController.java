@@ -32,9 +32,6 @@ public class AccountController extends ControllerBase {
     @Autowired
     private AccountService accountService;
 
-    public AccountController() {
-    }
-
     @GetMapping("/{id}")
     public ResponseDTO getById(@RequestHeader Map<String, String> headers, @PathVariable("id") final int id) {
         final long requestTime = System.currentTimeMillis();
