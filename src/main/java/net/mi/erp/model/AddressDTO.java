@@ -34,8 +34,6 @@ public class AddressDTO {
 
     private String comments;
 
-    private java.sql.Timestamp lastUpdatedTime;
-
-    private java.sql.Timestamp createdTime;
+    private String status;
 
 }
