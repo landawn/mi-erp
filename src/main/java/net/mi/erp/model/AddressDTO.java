@@ -1,4 +1,4 @@
-package net.mi.erp.dto;
+package net.mi.erp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
