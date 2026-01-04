@@ -15,7 +15,7 @@ import net.mi.erp.service.AccountService;
 
 @RestController
 @RequestMapping("/api/accounts")
-public class AccountController {
+public class AccountController extends ControllerBase {
 
     private final AccountService accountService;
 
