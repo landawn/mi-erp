@@ -1,5 +1,6 @@
 package net.mi.erp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.landawn.abacus.annotation.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +28,12 @@ public class AccountDTO {
 
     private String type;
 
-    private String status;
+    private UnifiedStatus status;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private java.sql.Timestamp lastUpdatedTime;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private java.sql.Timestamp createdTime;
 
 }

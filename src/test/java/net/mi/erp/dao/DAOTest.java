@@ -1,4 +1,4 @@
-package net.mi.erp;
+package net.mi.erp.dao;
 
 import javax.sql.DataSource;
 
@@ -7,12 +7,6 @@ import org.junit.jupiter.api.Test;
 import com.landawn.abacus.jdbc.JdbcUtil;
 import com.landawn.abacus.util.N;
 
-import net.mi.erp.dao.AccountDAO;
-import net.mi.erp.dao.AddressDAO;
-import net.mi.erp.dao.EmployeeAddressDAO;
-import net.mi.erp.dao.EmployeeDAO;
-import net.mi.erp.dao.LoginDAO;
-import net.mi.erp.dao.ProjectDAO;
 import net.mi.erp.entity.Account;
 import net.mi.erp.entity.Address;
 import net.mi.erp.entity.Employee;

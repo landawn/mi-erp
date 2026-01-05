@@ -1,5 +1,7 @@
 package net.mi.erp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +36,12 @@ public class AddressDTO {
 
     private String comments;
 
-    private String status;
+    private UnifiedStatus status;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private java.sql.Timestamp lastUpdatedTime;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private java.sql.Timestamp createdTime;
 
 }

@@ -76,7 +76,7 @@ public class AccountController extends ControllerBase {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    // @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseDTO deleteById(@RequestHeader Map<String, String> headers, @PathVariable final int id) {
         final long requestTime = System.currentTimeMillis();
         boolean found = false;
