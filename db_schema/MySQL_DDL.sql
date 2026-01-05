@@ -193,7 +193,7 @@ CREATE TABLE acl_user
     uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
     name              VARCHAR(128) NOT NULL,
-    description       VARCHAR(1024),
+    description       VARCHAR(512),
 
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
@@ -218,7 +218,7 @@ CREATE TABLE acl_group
     uuid              VARCHAR(64)  NOT NULL DEFAULT (UUID()),
 
     name              VARCHAR(128) NOT NULL,
-    description       VARCHAR(1024),
+    description       VARCHAR(512),
 
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
@@ -240,7 +240,7 @@ CREATE TABLE acl_user_group
     id                INT       NOT NULL AUTO_INCREMENT,
     user_id           INT       NOT NULL,
     group_id          INT       NOT NULL,
-    description       VARCHAR(1024),
+    description       VARCHAR(512),
 
     -- common columns for all tables
     status            TINYINT   NOT NULL DEFAULT 0,
@@ -270,7 +270,7 @@ CREATE TABLE acl_target
     type              VARCHAR(64)  NOT NULL,
     sub_type          VARCHAR(64)  NOT NULL,
 
-    description       VARCHAR(1024),
+    description       VARCHAR(512),
 
     -- common columns for all tables
     status            TINYINT      NOT NULL DEFAULT 0,
@@ -300,7 +300,7 @@ CREATE TABLE acl_user_group_target
     target_id         INT        NOT NULL,
 
     privilege         BIGINT(20) NOT NULL,
-    description       VARCHAR(1024),
+    description       VARCHAR(512),
 
     -- common columns for all tables
     status            TINYINT    NOT NULL DEFAULT 0,
