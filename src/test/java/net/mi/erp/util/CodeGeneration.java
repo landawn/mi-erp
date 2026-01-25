@@ -97,7 +97,7 @@ class CodeGeneration {
     }
 
     static void generateFieldNameClass() {
-        List<Class<?>> entityClasses = ClassUtil.getClassesByPackage("net.mi.erp.entity", false, false);
+        List<Class<?>> entityClasses = ClassUtil.findClassesInPackage("net.mi.erp.entity", false, false);
 
         CodeGenerationUtil.generatePropNameTableClasses(entityClasses, "x", "net.mi.erp.entity", "./src/main/java/");
 
