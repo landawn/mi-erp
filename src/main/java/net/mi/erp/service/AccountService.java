@@ -22,7 +22,7 @@ public class AccountService {
 
     public int create(final AccountDTO accountDTO) {
         Assert.notNull(accountDTO, "account must not be null");
-        Account account = Beans.copy(accountDTO, Account.class);
+        Account account = Beans.copyAs(accountDTO, Account.class);
         return accountDao.insert(account);
     }
 
