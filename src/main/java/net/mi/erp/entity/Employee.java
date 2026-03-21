@@ -1,6 +1,6 @@
 package net.mi.erp.entity;
-import java.util.List;
 
+import java.util.List;
 
 import com.landawn.abacus.annotation.Column;
 import com.landawn.abacus.annotation.Id;
@@ -55,7 +55,7 @@ public class Employee {
     @Column(name = "created_time")
     private java.sql.Timestamp createdTime;
 
-    @JoinedBy({"id=EmployeeAddress.employeeId", "EmployeeAddress.addressId=Address.id"})
+    @JoinedBy({ "id=EmployeeAddress.employeeId", "EmployeeAddress.addressId=Address.id" })
     private List<Address> addresses;
 
 }
