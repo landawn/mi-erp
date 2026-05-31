@@ -50,7 +50,7 @@
 > **4,212,000 Lines of Code**
 
 ##### **Grand Total Project Scope for Backend Dev**
-> **2,808,000 LOC** = **1,404,000 Production LOC** + **1,404,000 Test LOC** *(dev write 50% test code)*
+> **2,808,000 LOC** = **1,404,000 Production LOC** + **1,404,000 Test LOC** ~~*(dev write 50% test code)*~~ *(developers write 50% of the test code; the remaining 1,404,000 test LOC is AI/QA-generated)*
 
 ### Research done by ChatGPT
 
@@ -77,7 +77,7 @@ $$
 
 ### The Reality Gap
 *  **Required Output:** ~780 lines per day, per person.
-*  **Industry Average:** 20–50 lines of *finished, debugged* code per day for complex enterprise systems—*low, with plenty of room for improvement*
+*  **Industry Average:** 20–50 lines of *finished, debugged* code per day for complex enterprise systems ~~—*low, with plenty of room for improvement*~~ — *a conservative baseline that strong teams, tooling, and AI assistance can exceed*
 *  **Discrepancy:** The plan requires a pace **≈15×–39× faster** than the industry standard.
 
 ### Nonetheless, I believe it is still achievable under certain exceptional conditions:
@@ -101,7 +101,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 ---
 
-### Plan A: based on 5 backend developers in 3.5 months
+### Plan A: based on 5 backend developers in ~~3.5 months~~ ~3 months (60 working days: 8 + 4 + 8 + 40)
 
  
 #### Day 1–8 (8 working days, ~2 weeks) — Schema & table design (5 backend developers)
@@ -165,7 +165,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 
 #### Summary / Conclusion
 
-* With heavy use of generation + patterns, 5 backend developers produce **~180K LOC** across design, generated code, scaffolding in the first 5 weeks.
+* With heavy use of generation + patterns, 5 backend developers produce **~180K LOC** across design, generated code, and scaffolding in the first ~~5 weeks~~ 4 weeks (~20 working days: Day 1–20).
 * With aggressive reuse and AI assistance (50% reduction in production boilerplate + 50% automated test generation), per-developer effort in the 40-day (2 months) implementation sprint could be reduced to **~23,400 LOC** (≈585 LOC/day) — achievable only under highly controlled conditions:
 
   * excellent generation tooling and templates,
@@ -177,7 +177,7 @@ Together, these factors significantly boost productivity and reduce cognitive ov
 ---
 
 
-### Plan B: based on 3 backend + 2 frontend + 1 UX developers in 3 months to develop a demo ERP system
+### Plan B: based on 3 backend + 2 frontend + 1 UX developers in 3 months (70 working days: 10 + 5 + 10 + 45) to develop a demo ERP system
 
 * Production LOC (target): **140,400**
 * Test LOC (target): 0 (*No test code*)
