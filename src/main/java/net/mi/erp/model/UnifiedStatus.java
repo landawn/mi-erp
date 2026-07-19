@@ -16,12 +16,11 @@ package net.mi.erp.model;
 
 import com.landawn.abacus.util.AccountStatus;
 import com.landawn.abacus.util.ServiceStatus;
-import com.landawn.abacus.util.WeekDay;
 
 /**
  * Enumeration representing various status states for entities, services, processes, and operations.
  * Each status has an associated numeric code for efficient storage and comparison.
- * 
+ *
  * <p>This enum provides a comprehensive set of status values commonly used in applications:
  * <ul>
  *   <li>General account/service/object statuses (ACTIVE, SUSPENDED, EXPIRED, etc.)</li>
@@ -31,25 +30,25 @@ import com.landawn.abacus.util.WeekDay;
  *   <li>Privilege statuses (READ_ONLY, UPDATABLE, INSERTABLE, WRITABLE)</li>
  *   <li>State statuses (FROZEN, LOCKED, AVAILABLE, DISABLED, etc.)</li>
  * </ul>
- * 
+ *
  * <p>The status codes are designed to be stored efficiently in databases and provide
  * fast lookups through the {@link #fromCode(int)} method.
- * 
+ *
  * <p><b>Usage Examples:</b></p>
  * <pre>{@code
  * // Using status in an entity
  * Status orderStatus = Status.PROCESSING;
  * int statusCode = orderStatus.code();   // Returns 32
- * 
+ *
  * // Retrieving status from code
  * Status retrieved = Status.fromCode(32);   // Returns PROCESSING
- * 
+ *
  * // Checking status
  * if (userStatus == Status.ACTIVE) {
  *     // Allow access
  * }
  * }</pre>
- * 
+ *
  * @see ServiceStatus
  * @see AccountStatus
  * @see WeekDay
@@ -364,7 +363,7 @@ public enum UnifiedStatus {
      * Returns the numeric code associated with this status.
      * Codes are designed to be efficiently stored in databases and
      * provide fast lookups.
-     * 
+     *
      * <p><b>Usage Examples:</b></p>
      * <pre>{@code
      * Status status = Status.ACTIVE;
@@ -389,7 +388,7 @@ public enum UnifiedStatus {
     /**
      * Returns the Status enum constant associated with the specified code.
      * This method provides O(1) lookup performance for valid codes.
-     * 
+     *
      * <p><b>Usage Examples:</b></p>
      * <pre>{@code
      * Status status = Status.fromCode(1);     // Returns ACTIVE

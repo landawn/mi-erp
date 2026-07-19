@@ -77,19 +77,19 @@ class CodeGeneration {
         EntityCodeConfig ecc = EntityCodeConfig.builder()
                 .packageName("net.mi.erp.entity")
                 .srcDir("./src/main/java")
-                .idField("id")
+                .idFields(N.asList("id"))
                 .readOnlyFields(N.asSet("id", "uuid", "createdTime", "lastUpdatedTime"))
                 .fieldTypeConverter(
                         (_, _, columnName, columnClassName) -> columnName.equalsIgnoreCase("status") ? "net.mi.erp.model.UnifiedStatus" : columnClassName)
-                .customizedFieldDbTypes(N.asList(Tuple.of("status", "enumerated = EnumType.CODE")))
+                .fieldTypeAnnotationArguments(N.asList(Tuple.of("status", "enumerated = EnumType.CODE")))
                 // .classNamesToImport(N.asList(ClassUtil.getCanonicalClassName(UnifiedStatus.class)))
                 .generateBuilder(true)
-                .chainAccessor(false)
+                .generateChainAccessors(false)
                 // .generateFieldNameTable(true)
                 .build();
 
         for (String tableName : tableNames) {
-            ecc.setAdditionalFieldsOrLines(additionLinesMap.get(tableName));
+            ecc.setAdditionalClassBodySource(additionLinesMap.get(tableName));
             ecc.setClassNamesToImport(classNamesToImportMap.get(tableName));
 
             JdbcCodeGenerationUtil.generateEntityClass(ds, tableName, ecc);
