@@ -31,12 +31,12 @@ public class DAOTest {
     public void test_LoginDAO() {
         Account account = Account.builder().firstName("Jack").lastName("Johnson").emailAddress("jack@email.com").status(UnifiedStatus.ACTIVE).build();
         int accountId = accountDAO.insert(account);
-        Account accountFromDB = accountDAO.gett(accountId);
+        Account accountFromDB = accountDAO.getOrNull(accountId);
         N.println(accountFromDB);
 
         Login login = Login.builder().accountId(accountId).loginId("Jack_Johnson").loginPassword("123").status(UnifiedStatus.ACTIVE).build();
         int loginId = loginDAO.insert(login);
-        Login loginFromDB = loginDAO.gett(loginId);
+        Login loginFromDB = loginDAO.getOrNull(loginId);
         N.println(loginFromDB);
 
         loginDAO.loadJoinEntities(loginFromDB, Account.class);
@@ -46,8 +46,8 @@ public class DAOTest {
         accountDAO.deleteById(accountId);
         loginDAO.deleteById(accountId);
 
-        N.println(accountDAO.gett(accountId));
-        N.println(loginDAO.gett(loginId));
+        N.println(accountDAO.getOrNull(accountId));
+        N.println(loginDAO.getOrNull(loginId));
 
     }
 
@@ -57,12 +57,12 @@ public class DAOTest {
 
         int id = projectDAO.insert(project);
 
-        Project projectFromDB = projectDAO.gett(id);
+        Project projectFromDB = projectDAO.getOrNull(id);
         N.println(projectFromDB);
 
         projectDAO.deleteById(id);
 
-        N.println(projectDAO.gett(id));
+        N.println(projectDAO.getOrNull(id));
 
     }
 
@@ -83,8 +83,8 @@ public class DAOTest {
         int employeeId = employeeDAO.insert(employee);
         int addressId = addressDAO.insert(address);
 
-        Employee employeeFromDB = employeeDAO.gett(employeeId);
-        Address addressFromDB = addressDAO.gett(addressId);
+        Employee employeeFromDB = employeeDAO.getOrNull(employeeId);
+        Address addressFromDB = addressDAO.getOrNull(addressId);
 
         N.println(employeeFromDB);
         N.println(addressFromDB);
@@ -100,8 +100,8 @@ public class DAOTest {
         employeeDAO.deleteById(employeeId);
         addressDAO.deleteById(addressId);
 
-        N.println(employeeDAO.gett(employeeId));
-        N.println(addressDAO.gett(addressId));
+        N.println(employeeDAO.getOrNull(employeeId));
+        N.println(addressDAO.getOrNull(addressId));
     }
 
 }

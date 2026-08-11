@@ -17,7 +17,7 @@ public class AccountService {
     private AccountDAO accountDao;
 
     public Account getById(final int id) {
-        return accountDao.gett(id);
+        return accountDao.getOrNull(id);
     }
 
     public int create(final AccountDTO accountDTO) {
